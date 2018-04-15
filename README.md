@@ -2,15 +2,27 @@
 
 Go (golang) packages and CLI for ApiOmat
 
+[![Build Status](https://travis-ci.org/philippgille/apiomat-go.svg?branch=master)](https://travis-ci.org/philippgille/apiomat-go)
+
 Under construction!
 
 <img src="https://octodex.github.com/images/constructocat2.jpg" alt="under-construction" width="150"/> [![baby-gopher](https://raw.githubusercontent.com/drnic/babygopher-site/gh-pages/images/babygopher-badge.png)](http://www.babygopher.org)
+
+## Contents
+
+- [aomc - Package for handling "customer" resources during design-time](#aomc)
+- [aomu - Package for handling "user" resources during runtime](#aomu)
+- [aom - CLI for handling both "customer" and "user" resources](#aom)
 
 ## aomc
 
 Package for handling "customer" resources during design-time
 
 ### Usage
+
+[![GoDoc](https://godoc.org/github.com/philippgille/apiomat-go/aomc?status.svg)](https://godoc.org/github.com/philippgille/apiomat-go/aomc)
+
+#### Example
 
 ```go
 package main
@@ -58,7 +70,7 @@ Parameters:
         username (default "apinaut")
 ```
 
-Example:
+#### Example:
 
 ```bash
 $ aom -baseUrl "https://epdemo.apiomat.enterprises/yambas/rest" -username "john" -password "secret" -module "TestModule"
