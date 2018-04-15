@@ -13,7 +13,7 @@ func main() {
 	baseUrl := flag.String("baseUrl", "", `base URL, for example "https://epdemo.apiomat.enterprises/yambas/rest"`)
 	username := flag.String("username", "apinaut", "username")
 	password := flag.String("password", "secret", "password")
-	module := flag.String("module", "Basics", "Name of the module")
+	module := flag.String("module", "Basics", `Name of the module, for example "Basics"`)
 	flag.Parse()
 
 	// Version

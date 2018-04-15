@@ -37,7 +37,10 @@ const (
 	Test    System = "TEST"
 )
 
-// NewAomClient creates a new ApiOmat client
+// NewAomClient creates a new ApiOmat client.
+// username, password and system may be empty.
+// If username or password are empty, no HTTP Authorization header is set in the HTTP request.
+// If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
 func NewAomClient(baseUrl string, username string, password string, system System) AomClient {
 	// Remove trailing "/"
 	baseUrl = strings.TrimRight(baseUrl, "/")
@@ -52,6 +55,7 @@ func NewAomClient(baseUrl string, username string, password string, system Syste
 }
 
 // Get sends an HTTP GET request to a URL that consists of the AomClient's base URL and the given path and URL parameters
+// path maybe be empty, params maybe nil.
 func (client AomClient) Get(path string, params url.Values) (string, error) {
 	// Create URL
 	path = "/" + strings.TrimLeft(path, "/")

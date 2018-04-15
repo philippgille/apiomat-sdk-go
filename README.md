@@ -63,7 +63,7 @@ Parameters:
   -baseUrl string
         base URL, for example "https://epdemo.apiomat.enterprises/yambas/rest"
   -module string
-        Name of the module (default "Basics")
+        Name of the module, for example "Basics" (default "Basics")
   -password string
         password (default "secret")
   -username string
