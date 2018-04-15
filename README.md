@@ -4,7 +4,7 @@ Go (golang) packages and CLI for ApiOmat
 
 Under construction!
 
-<img src="https://octodex.github.com/images/constructocat2.jpg" alt="under-construction" style="width:150px;"> [![baby-gopher](https://raw.githubusercontent.com/drnic/babygopher-site/gh-pages/images/babygopher-badge.png)](http://www.babygopher.org)
+<img src="https://octodex.github.com/images/constructocat2.jpg" alt="under-construction" width="150"/> [![baby-gopher](https://raw.githubusercontent.com/drnic/babygopher-site/gh-pages/images/babygopher-badge.png)](http://www.babygopher.org)
 
 ## aomc
 
@@ -19,14 +19,13 @@ import (
     "fmt"
 
     "github.com/philippgille/apiomat-go/aomc"
-    "github.com/philippgille/apiomat-go/aomm"
 )
 
 func main() {
-    aomcClient := aomc.NewAomClient(aommClient.BaseUrl, "john", "secret", "")
+    aomcClient := aomc.NewAomClient("https://epdemo.apiomat.enterprises/yambas/rest", "john", "secret", "")
     classes, err := aomcClient.GetClasses("TestModule", "")
     if err != nil {
-        panic(err)
+        // handle error
     }
     fmt.Println(classes) // [{5ac5bbd76d79587667be0b40 https://epdemo.apiomat.enterprises/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 BankUser} ... ]
 }
@@ -39,6 +38,10 @@ Package for handling "user" resources during runtime
 ## aom
 
 CLI for handling both "customer" and "user" resources
+
+### Installation
+
+`go get "github.com/philippgille/apiomat-go/aom"`
 
 ### Usage
 
