@@ -33,7 +33,7 @@ func NewAomClient(baseUrl string, username string, password string, system aomm.
 // GetClasses returns the classes of the given module and system.
 // system may be empty.
 // If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
-// Example return value: [{5ac5bbd76d79587667be0b40 https://epdemo.apiomat.enterprises/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 BankUser} {5ac776326d79587667bf8987 https://epdemo.apiomat.enterprises/yambas/rest/modules/TestModule/metamodels/5ac776326d79587667bf8987 StandingOrder}]
+// Example return value: [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 TestClass} {5ac776326d79587667bf8987 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac776326d79587667bf8987 TestClass2}]
 func (client AomClient) GetClasses(module string, system aomm.System) ([]Class, error) {
 	jsonString, err := client.client.Get("modules/"+module+"/metamodels", nil)
 	if err != nil {

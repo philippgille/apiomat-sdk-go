@@ -10,7 +10,7 @@ import (
 
 func main() {
 	// CLI arguments
-	baseUrl := flag.String("baseUrl", "", `base URL, for example "https://epdemo.apiomat.enterprises/yambas/rest"`)
+	baseUrl := flag.String("baseUrl", "http://localhost:8080/yambas/rest", `base URL, for example "http://localhost:8080/yambas/rest"`)
 	username := flag.String("username", "apinaut", "username")
 	password := flag.String("password", "secret", "password")
 	module := flag.String("module", "Basics", `Name of the module, for example "Basics"`)
@@ -30,5 +30,5 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(classes) // [{5ac5bbd76d79587667be0b40 https://epdemo.apiomat.enterprises/yambas/rest/modules/ArzModule/metamodels/5ac5bbd76d79587667be0b40 StandingOrder} ... ]
+	fmt.Println(classes) // [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 TestClass} ... ]
 }

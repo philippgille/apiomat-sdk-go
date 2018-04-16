@@ -34,12 +34,12 @@ import (
 )
 
 func main() {
-    aomcClient := aomc.NewAomClient("https://epdemo.apiomat.enterprises/yambas/rest", "john", "secret", "")
+    aomcClient := aomc.NewAomClient("http://localhost:8080/yambas/rest", "john", "secret", "")
     classes, err := aomcClient.GetClasses("TestModule", "")
     if err != nil {
         // handle error
     }
-    fmt.Println(classes) // [{5ac5bbd76d79587667be0b40 https://epdemo.apiomat.enterprises/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 BankUser} ... ]
+    fmt.Println(classes) // [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 BankUser} ... ]
 }
 ```
 
@@ -73,8 +73,8 @@ Parameters:
 #### Example:
 
 ```bash
-$ aom -baseUrl "https://epdemo.apiomat.enterprises/yambas/rest" -username "john" -password "secret" -module "TestModule"
+$ aom -baseUrl "http://localhost:8080/yambas/rest" -username "john" -password "secret" -module "TestModule"
 
 {"server":"null:443","version":"2.6.2-107E"}
-[{5ac5bbd76d79587667be0b40 https://epdemo.apiomat.enterprises/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 BankUser} {5ac776326d79587667bf8987 https://epdemo.apiomat.enterprises/yambas/rest/modules/TestModule/metamodels/5ac776326d79587667bf8987 StandingOrder}]
+[{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 TestClass} {5ac776326d79587667bf8987 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac776326d79587667bf8987 TestClass2}]
 ```
