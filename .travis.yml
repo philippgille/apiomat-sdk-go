@@ -3,7 +3,10 @@ go:
   - "1.10"
 
 script:
-  - cd aomc
+  - cd aomm
+  - go build
+  - go test
+  - cd ../aomc
   - go build
   - cd ../aom
   - go build
