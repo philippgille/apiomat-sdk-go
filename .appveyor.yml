@@ -1,0 +1,25 @@
+version: "{build}"
+
+# GitHub specific alternative to `clone_depth: <number>`
+shallow_clone: true
+
+clone_folder: c:\gopath\src\github.com\philippgille\apiomat-go
+
+environment:
+  GOPATH: c:\gopath
+
+install:
+  - go version
+  - go env
+
+build_script:
+  - cd aomm
+  - go build
+  - cd ../aomc
+  - go build
+  - cd ../aom
+  - go build
+
+test_script:
+  - cd ../aomm
+  - go test -i

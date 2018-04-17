@@ -1,8 +1,8 @@
 # apiomat-go
 
-Go (golang) packages and CLI for ApiOmat
+[![Build Status](https://travis-ci.org/philippgille/apiomat-go.svg?branch=master)](https://travis-ci.org/philippgille/apiomat-go) [![Build status](https://ci.appveyor.com/api/projects/status/s8rxuaww5jrmfe21?svg=true)](https://ci.appveyor.com/project/philippgille/apiomat-go) [![GitHub Releases](https://img.shields.io/github/release/philippgille/apiomat-go.svg)](https://github.com/philippgille/apiomat-go/releases)
 
-[![Build Status](https://travis-ci.org/philippgille/apiomat-go.svg?branch=master)](https://travis-ci.org/philippgille/apiomat-go) [![GitHub Releases](https://img.shields.io/github/release/philippgille/apiomat-go.svg)](https://github.com/philippgille/apiomat-go/releases)
+Go (golang) packages and CLI for ApiOmat
 
 Under construction!
 
