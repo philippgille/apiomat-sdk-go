@@ -20,6 +20,7 @@ type AomClient struct {
 	// Default system is "LIVE"
 	system System
 
+	// Safe for concurrent use, so AomClient can be a value receiver and mutation doesn't lead to deadlocks
 	httpClient *http.Client
 }
 

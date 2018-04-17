@@ -1,6 +1,6 @@
 # apiomat-go
 
-[![Build Status](https://travis-ci.org/philippgille/apiomat-go.svg?branch=master)](https://travis-ci.org/philippgille/apiomat-go) [![Build status](https://ci.appveyor.com/api/projects/status/s8rxuaww5jrmfe21?svg=true)](https://ci.appveyor.com/project/philippgille/apiomat-go) [![GitHub Releases](https://img.shields.io/github/release/philippgille/apiomat-go.svg)](https://github.com/philippgille/apiomat-go/releases)
+[![Build Status](https://travis-ci.org/philippgille/apiomat-go.svg?branch=master)](https://travis-ci.org/philippgille/apiomat-go) [![Build status](https://ci.appveyor.com/api/projects/status/s8rxuaww5jrmfe21?svg=true)](https://ci.appveyor.com/project/philippgille/apiomat-go) [![Go Report Card](https://goreportcard.com/badge/github.com/philippgille/apiomat-go)](https://goreportcard.com/report/github.com/philippgille/apiomat-go) [![GitHub Releases](https://img.shields.io/github/release/philippgille/apiomat-go.svg)](https://github.com/philippgille/apiomat-go/releases)
 
 Go (golang) packages and CLI for ApiOmat
 
@@ -37,7 +37,7 @@ func main() {
     aomcClient := aomc.NewAomClient("http://localhost:8080/yambas/rest", "john", "secret", "")
     classes, err := aomcClient.GetClasses("TestModule", "")
     if err != nil {
-        // handle error
+        panic(err)
     }
     fmt.Println(classes) // [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 BankUser} ... ]
 }
@@ -75,6 +75,6 @@ Parameters:
 ```bash
 $ aom -baseUrl "http://localhost:8080/yambas/rest" -username "john" -password "secret" -module "TestModule"
 
-{"server":"null:443","version":"2.6.2-107E"}
+{"server":"localhost:8080","version":"2.6.2-107E"}
 [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 TestClass} {5ac776326d79587667bf8987 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac776326d79587667bf8987 TestClass2}]
 ```
