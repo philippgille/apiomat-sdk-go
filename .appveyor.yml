@@ -22,4 +22,6 @@ build_script:
 
 test_script:
   - cd ../aoms
-  - go test -i
+  - go test -v
+  - cd ../aomc
+  - go test -v

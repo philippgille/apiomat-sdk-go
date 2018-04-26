@@ -16,4 +16,6 @@ script:
   - go build
   # tests
   - cd ../aoms
-  - go test -i
+  - go test -v
+  - cd ../aomc
+  - go test -v

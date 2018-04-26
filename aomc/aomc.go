@@ -1,5 +1,12 @@
-// Package aomc is for handling ApiOmat "customer" resources during design-time.
-// For example, you can fetch all classes of an ApiOmat module.
+/*
+Package aomc is for handling ApiOmat "customer" resources during design-time.
+
+For example, you can fetch all classes of an ApiOmat module.
+
+You can use the package like this:
+1. Create a new Client instance with aomc.NewClient()
+2. Call for example the client's GetClasses() method to fetch all classes of a given module
+*/
 package aomc
 
 import (
@@ -8,34 +15,35 @@ import (
 	"github.com/philippgille/apiomat-go/aoms"
 )
 
-// AomClient is a client for ApiOmat
-type AomClient struct {
-	client aoms.AomClient
+// Client is a client for ApiOmat customer resources
+type Client struct {
+	// Embedded anonymous type
+	aoms.Client
 }
 
-// Class is the representation of an ApiOmat class (sometimes called MetaModel)
-type Class struct {
-	Id   string `json:"id"`
-	Href string `json:"href"`
-	Name string `json:"name"`
-}
-
-// NewAomClient creates a new ApiOmat client.
+// NewDefaultClient creates a new ApiOmat client with an underlying aoms.DefaultClient.
 // username, password and system may be empty.
 // If username or password are empty, no HTTP Authorization header is set in the HTTP request.
 // If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
-func NewAomClient(baseUrl string, username string, password string, system aoms.System) AomClient {
-	return AomClient{
-		client: aoms.NewAomClient(baseUrl, username, password, system),
+func NewDefaultClient(baseUrl string, username string, password string, system aoms.System) Client {
+	return Client{
+		Client: aoms.NewDefaultClient(baseUrl, username, password, system),
+	}
+}
+
+// NewClient creates a new ApiOmat client with a given client that implements the aoms.Client interface.
+func NewClient(client aoms.Client) Client {
+	return Client{
+		Client: client,
 	}
 }
 
 // GetClasses returns the classes of the given module and system.
 // system may be empty.
 // If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
-// Example return value: [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 TestClass} {5ac776326d79587667bf8987 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac776326d79587667bf8987 TestClass2}]
-func (client AomClient) GetClasses(module string, system aoms.System) ([]Class, error) {
-	jsonString, err := client.client.Get("modules/"+module+"/metamodels", nil)
+// Example return value: [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...} {...}]
+func (client Client) GetClasses(module string, system aoms.System) ([]Class, error) {
+	jsonString, err := client.Get("modules/"+module+"/metamodels", nil)
 	if err != nil {
 		return nil, err
 	}

@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/philippgille/apiomat-go/aomc"
-	"github.com/philippgille/apiomat-go/aoms"
 )
 
 func main() {
@@ -17,18 +16,17 @@ func main() {
 	flag.Parse()
 
 	// Version
-	aomsClient := aoms.NewAomClient(*baseUrl, "", "", "")
-	version, err := aomsClient.GetVersion()
+	client := aomc.NewDefaultClient(*baseUrl, *username, *password, "")
+	version, err := client.GetVersion()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(version) // {"server":"null:443","version":"2.6.2-107E"}
+	fmt.Printf("\nVersion: %v", version) // {"server":"null:443","version":"2.6.2-107E"}
 
 	// Classes
-	aomcClient := aomc.NewAomClient(aomsClient.BaseUrl, *username, *password, "")
-	classes, err := aomcClient.GetClasses(*module, "")
+	classes, err := client.GetClasses(*module, "")
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(classes) // [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 TestClass} ... ]
+	fmt.Printf("\nClasses of module %v: %+v", *module, classes) // [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...} {...}]
 }

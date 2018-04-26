@@ -1,17 +1,19 @@
-package aoms
+package aoms_test
 
 import (
 	"testing"
+
+	"github.com/philippgille/apiomat-go/aoms"
 )
 
 func TestSystem(t *testing.T) {
 	cases := []struct {
-		sys  System
+		sys  aoms.System
 		want string
 	}{
-		{Live, "LIVE"},
-		{Staging, "STAGING"},
-		{Test, "TEST"},
+		{aoms.Live, "LIVE"},
+		{aoms.Staging, "STAGING"},
+		{aoms.Test, "TEST"},
 	}
 	for _, c := range cases {
 		got := c.sys.String()

@@ -44,13 +44,21 @@ import (
 )
 
 func main() {
-    aomcClient := aomc.NewAomClient("http://localhost:8080/yambas/rest", "john", "secret", "")
-    classes, err := aomcClient.GetClasses("TestModule", "")
+    client := aomc.NewDefaultClient("http://localhost:8080/yambas/rest", "john", "secret", "")
+    classes, err := client.GetClasses("TestModule", "")
     if err != nil {
         panic(err)
     }
-    fmt.Println(classes) // [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 BankUser} ... ]
+    fmt.Printf("%+v", classes) // [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...} {...}]
 }
+```
+
+### Build
+
+For updating the ApiOmat customer resource types such as `Class`, you can turn example JSON into structs with [gojson](https://github.com/ChimeraCoder/gojson) like this:
+
+```bash
+gojson -input "json/class.json" -name "Class" -o "class_struct.go" -pkg "aomc"
 ```
 
 ## aomu
@@ -85,6 +93,6 @@ Parameters:
 ```bash
 $ aom -baseUrl "http://localhost:8080/yambas/rest" -username "john" -password "secret" -module "TestModule"
 
-{"server":"localhost:8080","version":"2.6.2-107E"}
-[{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 TestClass} {5ac776326d79587667bf8987 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac776326d79587667bf8987 TestClass2}]
+Version: {"server":"localhost:8080","version":"2.6.2-107E"}
+Classes of module TestModule: [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...} {...}]
 ```
