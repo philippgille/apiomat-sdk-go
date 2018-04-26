@@ -4,7 +4,7 @@ Package aomc is for handling ApiOmat "customer" resources during design-time.
 For example, you can fetch all classes of an ApiOmat module.
 
 You can use the package like this:
-1. Create a new Client instance with aomc.NewClient()
+1. Create a new Client instance with aomc.NewDefaultClient()
 2. Call for example the client's GetClasses() method to fetch all classes of a given module
 */
 package aomc
