@@ -18,6 +18,11 @@ import (
 	"strings"
 )
 
+// SdkVersion indicates to the ApiOmat server for which ApiOmat version the client was created.
+// This might lead to backward compatibility code being executed on the server.
+// This package version was implemented targeting ApiOmat version 2.6.0.
+const SdkVersion = "2.6.0"
+
 // Client is the interface for ApiOmat clients.
 // Use the DefaultClient, which is an implementation of this interface, or implement your own.
 // You can create your own type and embed DefaultClient to extend its functionality.
@@ -92,6 +97,8 @@ func (client DefaultClient) Get(path string, params url.Values) (string, error) 
 
 	// Set headers
 	req.Header.Add("Accept", "application/json")
+	// ApiOmat-specific headers
+	req.Header.Add("X-Apiomat-SdkVersion", SdkVersion)
 	if client.system != "" {
 		req.Header.Add("X-Apiomat-System", client.system.String())
 	}

@@ -13,6 +13,7 @@ vNext
 ### aoms
 
 - Added: Interface Client - acts as interface for consuming packages
+- Added: Constant SdkVersion - it indicates for which ApiOmat version the package was implemented
 - Changed: Renamed struct AomClient to DefaultClient to indicate that DefaultClient is one implementation of the Client interface
 - Changed: Field baseUrl of the type DefaultClient is not exported anymore
 
