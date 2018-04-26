@@ -5,12 +5,12 @@ package aomc
 import (
 	"encoding/json"
 
-	"github.com/philippgille/apiomat-go/aomm"
+	"github.com/philippgille/apiomat-go/aoms"
 )
 
 // AomClient is a client for ApiOmat
 type AomClient struct {
-	client aomm.AomClient
+	client aoms.AomClient
 }
 
 // Class is the representation of an ApiOmat class (sometimes called MetaModel)
@@ -24,9 +24,9 @@ type Class struct {
 // username, password and system may be empty.
 // If username or password are empty, no HTTP Authorization header is set in the HTTP request.
 // If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
-func NewAomClient(baseUrl string, username string, password string, system aomm.System) AomClient {
+func NewAomClient(baseUrl string, username string, password string, system aoms.System) AomClient {
 	return AomClient{
-		client: aomm.NewAomClient(baseUrl, username, password, system),
+		client: aoms.NewAomClient(baseUrl, username, password, system),
 	}
 }
 
@@ -34,7 +34,7 @@ func NewAomClient(baseUrl string, username string, password string, system aomm.
 // system may be empty.
 // If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
 // Example return value: [{5ac5bbd76d79587667be0b40 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac5bbd76d79587667be0b40 TestClass} {5ac776326d79587667bf8987 http://localhost:8080/yambas/rest/modules/TestModule/metamodels/5ac776326d79587667bf8987 TestClass2}]
-func (client AomClient) GetClasses(module string, system aomm.System) ([]Class, error) {
+func (client AomClient) GetClasses(module string, system aoms.System) ([]Class, error) {
 	jsonString, err := client.client.Get("modules/"+module+"/metamodels", nil)
 	if err != nil {
 		return nil, err

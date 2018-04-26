@@ -8,12 +8,12 @@ go:
 
 script:
   # builds
-  - cd aomm
+  - cd aoms
   - go build
   - cd ../aomc
   - go build
   - cd ../aom
   - go build
   # tests
-  - cd ../aomm
+  - cd ../aoms
   - go test -i

@@ -1,4 +1,4 @@
-package aomm
+package aoms
 
 import (
 	"testing"

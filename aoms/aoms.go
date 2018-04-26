@@ -1,6 +1,6 @@
-// Package aomm contains common functionality for sending HTTP requests to an ApiOmat instance.
+// Package aoms contains common functionality for sending HTTP requests to an ApiOmat instance.
 // Instead of using this package directly, you should use the packages aomc or aomu instead.
-package aomm
+package aoms
 
 import (
 	"encoding/base64"
@@ -11,7 +11,7 @@ import (
 )
 
 // AomClient is a client for ApiOmat
-// You should create an AomClient object with aomm.NewAomClient()
+// You should create an AomClient object with aoms.NewAomClient()
 type AomClient struct {
 	// ApiOmat base URL, for example: "https://epdemo.apiomat.enterprises/yambas/rest"
 	BaseUrl  string
