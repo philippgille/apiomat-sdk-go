@@ -68,31 +68,3 @@ Package for handling "user" resources during runtime
 ## aom
 
 CLI for handling both "customer" and "user" resources
-
-### Installation
-
-`go get "github.com/philippgille/apiomat-go/aom"`
-
-### Usage
-
-Parameters:
-
-```
-  -baseUrl string
-        base URL, for example "https://epdemo.apiomat.enterprises/yambas/rest"
-  -module string
-        Name of the module, for example "Basics" (default "Basics")
-  -password string
-        password (default "secret")
-  -username string
-        username (default "apinaut")
-```
-
-#### Example:
-
-```bash
-$ aom -baseUrl "http://localhost:8080/yambas/rest" -username "john" -password "secret" -module "TestModule"
-
-Version: {"server":"localhost:8080","version":"2.6.2-107E"}
-Classes of module TestModule: [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...} {...}]
-```

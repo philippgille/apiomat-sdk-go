@@ -17,8 +17,8 @@ build_script:
   - go build
   - cd ../aomc
   - go build
-  - cd ../aom
-  - go build
+  #- cd ../aom
+  #- go build
 
 test_script:
   - cd ../aoms
