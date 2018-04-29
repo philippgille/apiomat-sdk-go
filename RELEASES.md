@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+v0.3.0 (2018-04-29)
+-------------------
+
 ### aoms
 
 - Improved: Enhanced errors with stack trace and custom descriptions
