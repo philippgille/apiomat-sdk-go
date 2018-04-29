@@ -44,8 +44,8 @@ import (
 )
 
 func main() {
-    client := aomc.NewDefaultClient("http://localhost:8080/yambas/rest", "john", "secret", "")
-    classes, err := client.GetClasses("TestModule", "")
+    client := aomc.NewDefaultClient("https://apiomat.yourcompany.com/yambas/rest", "john", "secret", "")
+    classes, err := client.GetClasses("TestModule")
     if err != nil {
         panic(err)
     }
