@@ -22,3 +22,11 @@ func TestSystem(t *testing.T) {
 		}
 	}
 }
+
+func TestSystemCast(t *testing.T) {
+	want := aoms.Live
+	got := aoms.System("LIVE")
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
