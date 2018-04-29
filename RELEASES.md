@@ -11,6 +11,7 @@ vNext
 ### aom
 
 - Added: Debug flag for switching between printing a stack trace or not when an error occurs
+- Added: Version flag for printing the version of the aom CLI (instead of the ApiOmat server, which "aom version" is for)
 - Improved: Handle errors gracefully instead of panic
 - Improved: Pretty print (line break) the class list output
 

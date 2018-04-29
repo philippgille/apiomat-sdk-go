@@ -8,12 +8,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Increment and remove "+" in release commits.
+// Add "+" after release commits.
+const version = "v0.3.0+"
+
 var baseUrl string
 var username string
 var password string
 var system string
 
 var debug bool
+var printVersion bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -27,13 +32,19 @@ as well as runtime resources for users.
 
 Examples:
 
-- Print the version:
+- Print the version of the ApiOmat server:
 	aom version --baseUrl "https://apiomat.yourcompany.com/yambas/rest"
 - List all classes of module "MyModule":
 	aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yambas/rest" --username "john" --password "secret"`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
+	Run: func(cmd *cobra.Command, args []string) {
+		if printVersion {
+			fmt.Printf("aom version: %v", version)
+		} else {
+			cmd.Help()
+		}
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -60,7 +71,7 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.Flags().BoolVarP(&printVersion, "version", "v", false, "Print the version of the aom CLI (not of the ApiOmat server - use \"aom version\" for that")
 }
 
 // logError uses the CLI's debug flag to either print the error with stack trace or without.

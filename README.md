@@ -76,6 +76,7 @@ CLI for handling both "customer" and "user" resources
 ### Usage
 
 ```
+aom [flags]
 aom [command]
 
 Available Commands:
@@ -90,13 +91,14 @@ Flags:
       --password string   Password (default "secret")
       --system string     System (no default value, leads to the ApiOmat server using LIVE)
       --username string   Username (default "apinaut")
+  -v, --version           Print the version of the aom CLI (not of the ApiOmat server - use "aom version" for that
 
 Use "aom [command] --help" for more information about a command.
 ```
 
 #### Examples
 
-- Print the ApiOmat server version:
+- Print the version of the ApiOmat server:
     ```bash
     $ aom version --baseUrl "https://apiomat.yourcompany.com/yambas/rest"
     ApiOmat version: {"server":"null:443","version":"2.6.2-107E"}
