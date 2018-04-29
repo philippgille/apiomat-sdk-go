@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/gobs/pretty"
 	"github.com/spf13/cobra"
 
 	"github.com/philippgille/apiomat-go/aomc"
@@ -26,7 +27,8 @@ aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yamb
 			panic(err)
 		}
 
-		fmt.Printf("Classes of module %v: %+v", module, classes)
+		fmt.Printf("Classes of module %v:\n", module)
+		pretty.PrettyPrint(classes)
 	},
 }
 

@@ -14,6 +14,7 @@ install:
   # Install packages that aren't present by default
   - go get "github.com/pkg/errors"
   - go get "github.com/spf13/cobra"
+  - go get "github.com/gobs/pretty"
 
 build_script:
   - cd aoms

@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+### aom
+
+- Improved: Pretty print (line break) the class list output
+
 v0.3.0 (2018-04-29)
 -------------------
 

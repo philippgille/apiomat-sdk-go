@@ -102,6 +102,15 @@ Use "aom [command] --help" for more information about a command.
     ```
 - List all classes of module "MyModule":
     ```bash
-    $ aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yambas/rest" --username "john" --password "secret"
-    Classes of module MyModule: [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...}, ...]
+    $ aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yambas/rest" --username "john" --password "secret"Classes of module Basics:
+    [
+        struct {
+            AllowedRolesCreate: [
+            ],
+            AllowedRolesGrant: [
+            ],
+            ...
+        },
+        ...
+    ]
     ```
