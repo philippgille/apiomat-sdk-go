@@ -36,8 +36,6 @@ Examples:
 	aom version --baseUrl "https://apiomat.yourcompany.com/yambas/rest"
 - List all classes of module "MyModule":
 	aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yambas/rest" --username "john" --password "secret"`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
 		if printVersion {
 			fmt.Printf("aom version: %v", version)
@@ -59,9 +57,8 @@ func Execute() {
 func init() {
 	cobra.OnInitialize()
 
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
+	// Persistent flags
+
 	rootCmd.PersistentFlags().StringVar(&baseUrl, "baseUrl", "http://localhost:8080/yambas/rest", "Base URL")
 	rootCmd.PersistentFlags().StringVar(&username, "username", "apinaut", "Username")
 	rootCmd.PersistentFlags().StringVar(&password, "password", "secret", "Password")
@@ -69,8 +66,9 @@ func init() {
 
 	rootCmd.PersistentFlags().BoolVarP(&debug, "debug", "d", false, "Debug switch. Activate to include stack trace when errors are logged")
 
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
+	// Local flags
+
+	// Use our own version flag instead of setting "Version" on the rootCmd to have a nicer message and the "-v" shorthand
 	rootCmd.Flags().BoolVarP(&printVersion, "version", "v", false, "Print the version of the aom CLI (not of the ApiOmat server - use \"aom version\" for that")
 }
 
