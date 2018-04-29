@@ -11,6 +11,7 @@ vNext
 ### aomc
 
 - Changed: Removed parameter "system" from method GetClasses()
+- Fixed: Empty list of classes is returned even if an error occurs during unmarshalling the JSON body from the response
 
 v0.2.0 (2018-04-26)
 -------------------

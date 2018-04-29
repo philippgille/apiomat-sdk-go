@@ -46,6 +46,9 @@ func (client Client) GetClasses(module string) ([]Class, error) {
 		return nil, err
 	}
 	var classes []Class
-	json.Unmarshal([]byte(jsonString), &classes)
+	err = json.Unmarshal([]byte(jsonString), &classes)
+	if err != nil {
+		return nil, err
+	}
 	return classes, nil
 }
