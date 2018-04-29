@@ -16,6 +16,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/pkg/errors"
 )
 
 // SdkVersion indicates to the ApiOmat server for which ApiOmat version the client was created.
@@ -85,14 +87,15 @@ func NewDefaultClient(baseUrl string, username string, password string, system S
 func (client DefaultClient) Get(path string, params url.Values) (string, error) {
 	// Create URL
 	path = "/" + strings.TrimLeft(path, "/")
-	url, err := url.Parse(client.baseUrl + path)
+	urlString := client.baseUrl + path
+	url, err := url.Parse(urlString)
 	if err != nil {
-		return "", err
+		return "", errors.Wrapf(err, "URL couldn't be parsed: %s", urlString)
 	}
 	url.RawQuery = params.Encode()
 	req, err := http.NewRequest("GET", url.String(), nil)
 	if err != nil {
-		return "", err
+		return "", errors.Wrapf(err, "HTTP request couldn't be constructed")
 	}
 
 	// Set headers
@@ -109,14 +112,14 @@ func (client DefaultClient) Get(path string, params url.Values) (string, error) 
 	// Send request
 	resp, err := client.httpClient.Do(req)
 	if err != nil {
-		return "", err
+		return "", errors.Wrapf(err, "Error during sending the request: %+v", req)
 	}
 	defer resp.Body.Close()
 
 	// Read and return body
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return "", err
+		return "", errors.Wrapf(err, "Couldn't read response body")
 	}
 	return string(body), nil
 }

@@ -12,6 +12,8 @@ package aomc
 import (
 	"encoding/json"
 
+	"github.com/pkg/errors"
+
 	"github.com/philippgille/apiomat-go/aoms"
 )
 
@@ -48,7 +50,7 @@ func (client Client) GetClasses(module string) ([]Class, error) {
 	var classes []Class
 	err = json.Unmarshal([]byte(jsonString), &classes)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrapf(err, "Couldn't unmarshal the response body")
 	}
 	return classes, nil
 }
