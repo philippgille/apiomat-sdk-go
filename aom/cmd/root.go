@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -55,7 +56,29 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&password, "password", "secret", "Password")
 	rootCmd.PersistentFlags().StringVar(&system, "system", "", "System (no default value, leads to the ApiOmat server using LIVE)")
 
+	rootCmd.PersistentFlags().BoolVarP(&debug, "debug", "d", false, "Debug switch. Activate to include stack trace when errors are logged")
+
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+// logError uses the CLI's debug flag to either print the error with stack trace or without.
+// Calling this:
+// logError(err, "An error occurred during fetching the classes of module %v", module )
+// Leads to this:
+// log.Printf("An error occurred during fetching the classes of module %v: %v", module, err)
+// Or if the debug flag is activated, the error gets formatted with %+v, leading to the stack trace being logged as well.
+func logError(err error, format string, v ...interface{}) {
+	if debug {
+		log.Printf(format+": %+v", v, err)
+	} else {
+		log.Printf(format+": %v", v, err)
+	}
+}
+
+// logFatal executes logError and then os.Exit(1)
+func logFatal(err error, format string, v ...interface{}) {
+	logError(err, format, v)
+	os.Exit(1)
 }

@@ -85,6 +85,7 @@ Available Commands:
 
 Flags:
       --baseUrl string    Base URL (default "http://localhost:8080/yambas/rest")
+  -d, --debug             Debug switch. Activate to include stack trace when errors are logged
   -h, --help              help for aom
       --password string   Password (default "secret")
       --system string     System (no default value, leads to the ApiOmat server using LIVE)
@@ -102,7 +103,8 @@ Use "aom [command] --help" for more information about a command.
     ```
 - List all classes of module "MyModule":
     ```bash
-    $ aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yambas/rest" --username "john" --password "secret"Classes of module Basics:
+    $ aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yambas/rest" --username "john" --password "secret"
+    Classes of module MyModule:
     [
         struct {
             AllowedRolesCreate: [

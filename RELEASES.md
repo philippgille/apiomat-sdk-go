@@ -10,6 +10,8 @@ vNext
 
 ### aom
 
+- Added: Debug flag for switching between printing a stack trace or not when an error occurs
+- Improved: Handle errors gracefully instead of panic
 - Improved: Pretty print (line break) the class list output
 
 v0.3.0 (2018-04-29)

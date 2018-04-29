@@ -22,7 +22,7 @@ aom version --baseUrl "https://apiomat.yourcompany.com/yambas/rest"`,
 
 		version, err := client.GetVersion()
 		if err != nil {
-			panic(err)
+			logFatal(err, "An error occurred during fetching the version of the ApiOmat server")
 		}
 
 		fmt.Printf("ApiOmat version: %v", version)
