@@ -7,8 +7,6 @@ import (
 	"testing"
 
 	"github.com/philippgille/apiomat-go/aomc"
-
-	"github.com/philippgille/apiomat-go/aoms"
 )
 
 // FakeClient is a fake implementation of the aoms.Client interface.
@@ -60,7 +58,7 @@ func TestGetClasses(t *testing.T) {
 	fakeClient := FakeClient{}
 	client := aomc.NewClient(fakeClient)
 	// Call method to test
-	got, err := client.GetClasses(moduleName, aoms.Live)
+	got, err := client.GetClasses(moduleName)
 	// Assertions
 	stopOnError(err, t)
 	if reflect.DeepEqual(got, want) == false {

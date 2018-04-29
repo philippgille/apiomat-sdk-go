@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+### aomc
+
+- Changed: Removed parameter "system" from method GetClasses()
+
 v0.2.0 (2018-04-26)
 -------------------
 

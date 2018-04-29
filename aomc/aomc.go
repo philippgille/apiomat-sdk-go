@@ -38,11 +38,9 @@ func NewClient(client aoms.Client) Client {
 	}
 }
 
-// GetClasses returns the classes of the given module and system.
-// system may be empty.
-// If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
+// GetClasses returns the classes of the given module.
 // Example return value: [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...} {...}]
-func (client Client) GetClasses(module string, system aoms.System) ([]Class, error) {
+func (client Client) GetClasses(module string) ([]Class, error) {
 	jsonString, err := client.Get("modules/"+module+"/metamodels", nil)
 	if err != nil {
 		return nil, err
