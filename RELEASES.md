@@ -18,6 +18,10 @@ vNext
 - Changed: Removed parameter "system" from method GetClasses()
 - Fixed: Empty list of classes is returned even if an error occurs during unmarshalling the JSON body from the response
 
+### aom
+
+- Changed: Replaced CLI lib "flags" by "github.com/spf13/cobra", leading to a complete change of the CLI (different usage, but same functionality)
+
 v0.2.0 (2018-04-26)
 -------------------
 

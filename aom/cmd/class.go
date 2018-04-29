@@ -1,38 +1,22 @@
-// Copyright © 2018 NAME HERE <EMAIL ADDRESS>
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
+
+var module string
 
 // classCmd represents the class command
 var classCmd = &cobra.Command{
 	Use:   "class",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Manages the \"MetaModel\" resource",
+	Long: `
+class is a command for managing the \"MetaModel\" resource.
+	
+It's typically used during design-time of a module by a customer.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("class called")
-	},
+For example, to list all classes of module "MyModule":
+aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yambas/rest" --username "john" --password "secret"`,
 }
 
 func init() {
@@ -42,7 +26,7 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// classCmd.PersistentFlags().String("foo", "", "A help for foo")
+	classCmd.PersistentFlags().StringVar(&module, "module", "Basics", "Module name")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:

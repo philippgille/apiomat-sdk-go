@@ -11,14 +11,17 @@ environment:
 install:
   - go version
   - go env
+  # Install packages that aren't present by default
+  - go get "github.com/pkg/errors"
+  - go get "github.com/spf13/cobra"
 
 build_script:
   - cd aoms
   - go build
   - cd ../aomc
   - go build
-  #- cd ../aom
-  #- go build
+  - cd ../aom
+  - go build
 
 test_script:
   - cd ../aoms
