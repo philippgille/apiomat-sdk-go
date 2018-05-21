@@ -5,7 +5,6 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/philippgille/apiomat-go/aomc"
 	"github.com/philippgille/apiomat-go/aoms"
 )
 
@@ -18,7 +17,7 @@ var versionCmd = &cobra.Command{
 For example:
 aom version --baseUrl "https://apiomat.yourcompany.com/yambas/rest"`,
 	Run: func(cmd *cobra.Command, args []string) {
-		client := aomc.NewDefaultClient(baseUrl, username, password, aoms.System(system))
+		client := aoms.NewDefaultClient(baseUrl, "", "", "")
 
 		version, err := client.GetVersion()
 		if err != nil {
