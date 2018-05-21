@@ -17,6 +17,7 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/gobs/pretty"
 	"github.com/pkg/errors"
 )
 
@@ -112,7 +113,7 @@ func (client DefaultClient) Get(path string, params url.Values) (string, error) 
 	// Send request
 	resp, err := client.httpClient.Do(req)
 	if err != nil {
-		return "", errors.Wrapf(err, "Error during sending the request: %+v", req)
+		return "", errors.Wrapf(err, "Error during sending the request:\n%v", pretty.PrettyFormat(req))
 	}
 	defer resp.Body.Close()
 
