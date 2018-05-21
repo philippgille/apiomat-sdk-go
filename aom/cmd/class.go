@@ -24,5 +24,7 @@ func init() {
 
 	// Persistent flags
 
+	registerCommonFlags(classCmd)
+
 	classCmd.PersistentFlags().StringVar(&module, "module", "Basics", "Module name")
 }

@@ -59,11 +59,6 @@ func init() {
 
 	// Persistent flags
 
-	rootCmd.PersistentFlags().StringVar(&baseUrl, "baseUrl", "http://localhost:8080/yambas/rest", "Base URL")
-	rootCmd.PersistentFlags().StringVar(&username, "username", "apinaut", "Username")
-	rootCmd.PersistentFlags().StringVar(&password, "password", "secret", "Password")
-	rootCmd.PersistentFlags().StringVar(&system, "system", "", "System (no default value, leads to the ApiOmat server using LIVE)")
-
 	rootCmd.PersistentFlags().BoolVarP(&debug, "debug", "d", false, "Debug switch. Activate to include stack trace when errors are logged")
 
 	// Local flags
@@ -90,4 +85,15 @@ func logError(err error, format string, v ...interface{}) {
 func logFatal(err error, format string, v ...interface{}) {
 	logError(err, format, v)
 	os.Exit(1)
+}
+
+func registerBaseUrl(command *cobra.Command) {
+	command.PersistentFlags().StringVar(&baseUrl, "baseUrl", "http://localhost:8080/yambas/rest", "Base URL")
+}
+
+func registerCommonFlags(command *cobra.Command) {
+	registerBaseUrl(command)
+	command.PersistentFlags().StringVar(&username, "username", "apinaut", "Username")
+	command.PersistentFlags().StringVar(&password, "password", "secret", "Password")
+	command.PersistentFlags().StringVar(&system, "system", "", "System (no default value, leads to the ApiOmat server using LIVE)")
 }

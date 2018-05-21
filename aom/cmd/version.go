@@ -31,4 +31,6 @@ aom version --baseUrl "https://apiomat.yourcompany.com/yambas/rest"`,
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
+
+	registerBaseUrl(versionCmd)
 }

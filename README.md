@@ -85,13 +85,9 @@ Available Commands:
   version     Prints the version of the ApiOmat server
 
 Flags:
-      --baseUrl string    Base URL (default "http://localhost:8080/yambas/rest")
-  -d, --debug             Debug switch. Activate to include stack trace when errors are logged
-  -h, --help              help for aom
-      --password string   Password (default "secret")
-      --system string     System (no default value, leads to the ApiOmat server using LIVE)
-      --username string   Username (default "apinaut")
-  -v, --version           Print the version of the aom CLI (not of the ApiOmat server - use "aom version" for that
+  -d, --debug     Debug switch. Activate to include stack trace when errors are logged
+  -h, --help      help for aom
+  -v, --version   Print the version of the aom CLI (not of the ApiOmat server - use "aom version" for that
 
 Use "aom [command] --help" for more information about a command.
 ```

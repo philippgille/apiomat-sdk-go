@@ -14,6 +14,7 @@ vNext
 - Added: Version flag for printing the version of the aom CLI (instead of the ApiOmat server, which "aom version" is for)
 - Improved: Handle errors gracefully instead of panic
 - Improved: Pretty print (line break) the class list output
+- Improved: Move baseUrl, username, password and system flags from root to sub commands
 - Fixed: Backslash meant to escape quotes is contained in description of the class command
 
 v0.3.0 (2018-04-29)
