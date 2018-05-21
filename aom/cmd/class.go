@@ -9,9 +9,9 @@ var module string
 // classCmd represents the class command
 var classCmd = &cobra.Command{
 	Use:   "class",
-	Short: "Manages the \"MetaModel\" resource",
+	Short: `Manages the "MetaModel" resource`,
 	Long: `
-class is a command for managing the \"MetaModel\" resource.
+class is a command for managing the "MetaModel" resource.
 	
 It's typically used during design-time of a module by a customer.
 
