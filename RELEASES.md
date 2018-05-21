@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+v0.4.0 (2018-05-21)
+-------------------
+
 ### aom
 
 - Added: Debug flag for switching between printing a stack trace or not when an error occurs
