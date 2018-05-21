@@ -74,16 +74,18 @@ func init() {
 // log.Printf("An error occurred during fetching the classes of module %v: %v", module, err)
 // Or if the debug flag is activated, the error gets formatted with %+v, leading to the stack trace being logged as well.
 func logError(err error, format string, v ...interface{}) {
+	// Even if no third parameter was passed, v is an empty slice, so appending works
+	v = append(v, err)
 	if debug {
-		log.Printf(format+": %+v", v, err)
+		log.Printf(format+":\n%+v", v...)
 	} else {
-		log.Printf(format+": %v", v, err)
+		log.Printf(format+":\n%v", v...)
 	}
 }
 
 // logFatal executes logError and then os.Exit(1)
 func logFatal(err error, format string, v ...interface{}) {
-	logError(err, format, v)
+	logError(err, format, v...)
 	os.Exit(1)
 }
 
