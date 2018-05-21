@@ -12,9 +12,10 @@ before_install:
 
 script:
   # builds
-  - go build -i github.com/philippgille/apiomat-go/aoms
-  - go build -i github.com/philippgille/apiomat-go/aomc
-  - go build -i github.com/philippgille/apiomat-go/aom
+  - go build github.com/philippgille/apiomat-go/aoms
+  - go build github.com/philippgille/apiomat-go/aomc
+  # Output is needed so that the file and directory names don't clash (both "aom")
+  - go build -o aom/aom github.com/philippgille/apiomat-go/aom
   # tests
   - go test -v github.com/philippgille/apiomat-go/aoms
   - go test -v github.com/philippgille/apiomat-go/aomc

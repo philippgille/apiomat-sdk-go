@@ -11,11 +11,14 @@ environment:
 install:
   - go version
   - go env
+  # Get all dependencies
+  - go get -d ./...
 
 build_script:
-  - go build -i github.com\philippgille\apiomat-go\aoms
-  - go build -i github.com\philippgille\apiomat-go\aomc
-  - go build -i github.com\philippgille\apiomat-go\aom
+  - go build github.com\philippgille\apiomat-go\aoms
+  - go build github.com\philippgille\apiomat-go\aomc
+  # Use an explicit output file to have the same behavior as in Travis CI
+  - go build -o aom\aom.exe github.com\philippgille\apiomat-go\aom
 
 test_script:
   - go test -v github.com\philippgille\apiomat-go\aoms
