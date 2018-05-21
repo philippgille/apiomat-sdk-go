@@ -6,16 +6,15 @@ language: go
 go:
   - "1.10"
 
+before_install:
+  - go version
+  - go env
+
 script:
   # builds
-  - cd aoms
-  - go build
-  - cd ../aomc
-  - go build
-  - cd ../aom
-  - go build
+  - go build -i github.com/philippgille/apiomat-go/aoms
+  - go build -i github.com/philippgille/apiomat-go/aomc
+  - go build -i github.com/philippgille/apiomat-go/aom
   # tests
-  - cd ../aoms
-  - go test -v
-  - cd ../aomc
-  - go test -v
+  - go test -v github.com/philippgille/apiomat-go/aoms
+  - go test -v github.com/philippgille/apiomat-go/aomc

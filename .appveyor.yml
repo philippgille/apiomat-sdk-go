@@ -1,9 +1,9 @@
 version: "{build}"
 
+clone_folder: c:\gopath\src\github.com\philippgille\apiomat-go
+
 # GitHub specific alternative to `clone_depth: <number>`
 shallow_clone: true
-
-clone_folder: c:\gopath\src\github.com\philippgille\apiomat-go
 
 environment:
   GOPATH: c:\gopath
@@ -11,21 +11,12 @@ environment:
 install:
   - go version
   - go env
-  # Install packages that aren't present by default
-  - go get "github.com/pkg/errors"
-  - go get "github.com/spf13/cobra"
-  - go get "github.com/gobs/pretty"
 
 build_script:
-  - cd aoms
-  - go build
-  - cd ../aomc
-  - go build
-  - cd ../aom
-  - go build
+  - go build -i github.com\philippgille\apiomat-go\aoms
+  - go build -i github.com\philippgille\apiomat-go\aomc
+  - go build -i github.com\philippgille\apiomat-go\aom
 
 test_script:
-  - cd ../aoms
-  - go test -v
-  - cd ../aomc
-  - go test -v
+  - go test -v github.com\philippgille\apiomat-go\aoms
+  - go test -v github.com\philippgille\apiomat-go\aomc
