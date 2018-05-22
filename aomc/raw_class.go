@@ -1,7 +1,7 @@
 package aomc
 
-// Class struct generated with gojson
-type Class struct {
+// RawClass struct generated with gojson
+type RawClass struct {
 	AllowedRolesCreate     []string `json:"allowedRolesCreate"`
 	AllowedRolesGrant      []string `json:"allowedRolesGrant"`
 	AllowedRolesRead       []string `json:"allowedRolesRead"`

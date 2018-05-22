@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+### aomc
+
+- Changed: Renamed the Class struct and the related methods to "RawClass"
+
 v0.4.0 (2018-05-21)
 -------------------
 

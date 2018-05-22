@@ -6,17 +6,18 @@ import (
 	"github.com/pkg/errors"
 )
 
-// GetClasses returns the classes of the given module.
+// GetRawClasses returns the raw classes of the given module.
+// "Raw" means the struct is mapped 1:1 to a "MetaModel" JSON, without embedded attribute structs for example.
 // Example return value: [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...} {...}]
-func (client Client) GetClasses(module string) ([]Class, error) {
+func (client Client) GetRawClasses(module string) ([]RawClass, error) {
 	jsonString, err := client.Get("modules/"+module+"/metamodels", nil)
 	if err != nil {
 		return nil, err
 	}
-	var classes []Class
-	err = json.Unmarshal([]byte(jsonString), &classes)
+	var rawClasses []RawClass
+	err = json.Unmarshal([]byte(jsonString), &rawClasses)
 	if err != nil {
 		return nil, errors.Wrapf(err, "Couldn't unmarshal the response body")
 	}
-	return classes, nil
+	return rawClasses, nil
 }
