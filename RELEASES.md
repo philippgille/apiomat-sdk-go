@@ -20,7 +20,7 @@ v0.4.0 (2018-05-21)
 
 ### aoms
 
-- Improved: Pretty print (line break) the request when an error occurs
+- Improved: Pretty print (line break) the HTTP request when an error occurs
 
 ### aom
 
@@ -41,8 +41,8 @@ v0.3.0 (2018-04-29)
 ### aomc
 
 - Improved: Enhanced errors with stack trace and custom descriptions
-- Changed: Removed parameter "system" from method GetClasses()
-- Fixed: Empty list of classes is returned even if an error occurs during unmarshalling the JSON body from the response
+- Changed: Removed parameter `system` from method `GetClasses()`
+- Fixed: Empty list of `Class` structs is returned even if an error occurs during unmarshalling the JSON body from the response
 
 ### aom
 
@@ -51,25 +51,25 @@ v0.3.0 (2018-04-29)
 v0.2.0 (2018-04-26)
 -------------------
 
-- Changed: Renamed package aomm to aoms
+- Changed: Renamed package `aomm` to `aoms`
 
 ### aoms
 
-- Added: Interface Client - acts as interface for consuming packages
-- Added: Constant SdkVersion - it indicates for which ApiOmat version the package was implemented
-- Changed: Renamed struct AomClient to DefaultClient to indicate that DefaultClient is one implementation of the Client interface
-- Changed: Field baseUrl of the type DefaultClient is not exported anymore
+- Added: Interface `Client` - acts as interface for consuming packages
+- Added: Constant `SdkVersion` - it indicates for which ApiOmat version the package was implemented
+- Changed: Renamed struct `AomClient` to `DefaultClient` to indicate that `DefaultClient` is one implementation of the `Client` interface
+- Changed: Field `baseUrl` of the type `DefaultClient` is not exported anymore
 
 ### aomc
 
-- Added: method NewClient(client aoms.Client) - creates a new Client that uses the given aoms.Client implementation as underlying ApiOmat HTTP client
-- Improved: Added all JSON fields to the class struct by generating it with `gojson`
-- Changed: Renamed struct DefaultClient to Client
+- Added: Method `NewClient(client aoms.Client)` - creates a new `Client` that uses the given `aoms.Client` implementation as underlying ApiOmat HTTP client
+- Improved: Added all JSON fields to the `Class` struct by generating it with `gojson`
+- Changed: Renamed struct `DefaultClient` to `Client`
 
 ### aom
 
 - Improved: Added proper formatting to output
-- Improved: Removed direct dependency on package aoms
+- Improved: Removed direct dependency on package `aoms`
 
 v0.1.0 (2018-04-15)
 -------------------
