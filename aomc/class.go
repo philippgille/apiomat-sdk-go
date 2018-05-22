@@ -21,3 +21,9 @@ func (client Client) GetRawClasses(module string) ([]RawClass, error) {
 	}
 	return rawClasses, nil
 }
+
+// GetRawAttributes returns the raw attributes of the given class.
+// "Raw" means the struct is mapped 1:1 to a "MetaModelAttribute" JSON
+func (client Client) GetRawAttributes(class RawClass) ([]RawAttribute, error) {
+	panic("not implemented yet")
+}

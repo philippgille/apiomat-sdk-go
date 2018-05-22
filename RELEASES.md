@@ -10,7 +10,10 @@ vNext
 
 ### aomc
 
-- Changed: Renamed the Class struct and the related methods to "RawClass"
+- Added: Struct `RawAttribute`
+- Added: Method skeleton for `GetRawAttributes()`
+- Changed: Renamed the `Class` struct to `RawClass`
+- Changed: Renamed method `GetClasses()` to `GetRawClasses()`
 
 v0.4.0 (2018-05-21)
 -------------------
