@@ -11,6 +11,10 @@ vNext
 v0.4.0 (2018-05-21)
 -------------------
 
+### aoms
+
+- Improved: Pretty print (line break) the request when an error occurs
+
 ### aom
 
 - Added: Debug flag for switching between printing a stack trace or not when an error occurs
@@ -18,7 +22,6 @@ v0.4.0 (2018-05-21)
 - Improved: Handle errors gracefully instead of panic
 - Improved: Pretty print (line break) the class list output
 - Improved: Move baseUrl, username, password and system flags from root to sub commands
-- Improved: Pretty print (line break) the request when an error occurs
 - Fixed: Backslash meant to escape quotes is contained in description of the class command
 
 v0.3.0 (2018-04-29)
