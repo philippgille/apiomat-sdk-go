@@ -9,10 +9,10 @@ import (
 	"github.com/philippgille/apiomat-go/aomc"
 )
 
-// TestGetClasses tests if aomc.GetRawClasses leads to the correct aoms.Client call and the correct returned JSON
-func TestGetClasses(t *testing.T) {
+// TestGetRawClasses tests if aomc.GetRawClasses leads to the correct aoms.Client call and the correct returned JSON
+func TestGetRawClasses(t *testing.T) {
 	// Prepare fake data and Get() implementation
-	want := []aomc.RawClass{
+	expected := []aomc.RawClass{
 		aomc.RawClass{
 			ID: "123",
 		},
@@ -20,9 +20,9 @@ func TestGetClasses(t *testing.T) {
 			ID: "456",
 		},
 	}
-	wantJsonBytes, err := json.Marshal(want)
+	expectedJsonBytes, err := json.Marshal(expected)
 	stopOnError(err, t)
-	wantJson := string(wantJsonBytes)
+	expectedJson := string(expectedJsonBytes)
 	moduleName := "fakeModule"
 	onGet = func(path string, params url.Values) (string, error) {
 		// Assertions
@@ -34,16 +34,16 @@ func TestGetClasses(t *testing.T) {
 			t.Errorf("params was %v, but should be %v", params, nil)
 		}
 		// Assertions were okay, return fake data
-		return wantJson, nil
+		return expectedJson, nil
 	}
 	// Create fake client
 	fakeClient := FakeClient{}
 	client := aomc.NewClient(fakeClient)
 	// Call method to test
-	got, err := client.GetRawClasses(moduleName)
+	actual, err := client.GetRawClasses(moduleName)
 	// Assertions
 	stopOnError(err, t)
-	if reflect.DeepEqual(got, want) == false {
-		t.Errorf("got %+v, want %+v", got, want)
+	if reflect.DeepEqual(actual, expected) == false {
+		t.Errorf("actual %+v, expected %+v", actual, expected)
 	}
 }

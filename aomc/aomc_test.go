@@ -18,6 +18,7 @@ func (c FakeClient) Get(path string, params url.Values) (string, error) {
 }
 
 // Functions called by the fake client's methods, can be defined by each test
+
 var onGetVersion = func() (string, error) {
 	return "1.2.3", nil
 }
