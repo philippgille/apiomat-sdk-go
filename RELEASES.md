@@ -11,7 +11,7 @@ vNext
 ### aomc
 
 - Added: Struct `RawAttribute`
-- Added: Method skeleton for `GetRawAttributes()`
+- Added: Method `GetRawAttributes()` for fetching the attributes of a class
 - Changed: Renamed the `Class` struct to `RawClass`
 - Changed: Renamed method `GetClasses()` to `GetRawClasses()`
 

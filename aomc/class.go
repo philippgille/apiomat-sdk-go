@@ -24,6 +24,15 @@ func (client Client) GetRawClasses(module string) ([]RawClass, error) {
 
 // GetRawAttributes returns the raw attributes of the given class.
 // "Raw" means the struct is mapped 1:1 to a "MetaModelAttribute" JSON
-func (client Client) GetRawAttributes(class RawClass) ([]RawAttribute, error) {
-	panic("not implemented yet")
+func (client Client) GetRawAttributes(module string, classId string) ([]RawAttribute, error) {
+	jsonString, err := client.Get("modules/"+module+"/metamodels/"+classId+"/attributes", nil)
+	if err != nil {
+		return nil, err
+	}
+	var rawAttributes []RawAttribute
+	err = json.Unmarshal([]byte(jsonString), &rawAttributes)
+	if err != nil {
+		return nil, errors.Wrapf(err, "Couldn't unmarshal the response body")
+	}
+	return rawAttributes, nil
 }
