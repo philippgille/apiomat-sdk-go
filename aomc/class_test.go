@@ -24,9 +24,9 @@ func TestGetRawClasses(t *testing.T) {
 	stopOnError(err, t)
 	expectedJson := string(expectedJsonBytes)
 	moduleName := "fakeModule"
+	expectedPath := "modules/" + moduleName + "/metamodels"
 	onGet = func(path string, params url.Values) (string, error) {
 		// Assertions
-		expectedPath := "modules/" + moduleName + "/metamodels"
 		if path != expectedPath {
 			t.Errorf("path was %q, but should be %q", path, expectedPath)
 		}
@@ -64,9 +64,9 @@ func TestGetRawAttributes(t *testing.T) {
 	expectedJson := string(expectedJsonBytes)
 	moduleName := "fakeModule"
 	classId := "789"
+	expectedPath := "modules/" + moduleName + "/metamodels/" + classId + "/attributes"
 	onGet = func(path string, params url.Values) (string, error) {
 		// Assertions
-		expectedPath := "modules/" + moduleName + "/metamodels/" + classId + "/attributes"
 		if path != expectedPath {
 			t.Errorf("path was %q, but should be %q", path, expectedPath)
 		}
