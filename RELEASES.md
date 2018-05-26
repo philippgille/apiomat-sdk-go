@@ -10,7 +10,7 @@ vNext
 
 ### aoms
 
-- Added: Function `ConvertUnixMillisToTime()`
+- Added: Function `ConvertUnixMillisToTime(msec int64) time.Time`, which is easier to understand as `time.Unix(0, msec<<3)`
 - Added: Function `MustUrl(url *url.URL, err error) *url.URL` for parsing and dereferencing a URL in one line
 
 ### aomc
@@ -47,7 +47,7 @@ v0.3.0 (2018-04-29)
 ### aomc
 
 - Improved: Enhanced errors with stack trace and custom descriptions
-- Changed: Removed parameter `system` from method `GetClasses()`
+- Changed: Removed parameter `system` from method `GetClasses(...)`
 - Fixed: Empty list of `Class` structs is returned even if an error occurs during unmarshalling the JSON body from the response
 
 ### aom
@@ -68,7 +68,7 @@ v0.2.0 (2018-04-26)
 
 ### aomc
 
-- Added: Method `NewClient(client aoms.Client)` - creates a new `Client` that uses the given `aoms.Client` implementation as underlying ApiOmat HTTP client
+- Added: Function `NewClient(client aoms.Client) Client` - creates a new `Client` that uses the given `aoms.Client` implementation as underlying ApiOmat HTTP client
 - Improved: Added all JSON fields to the `Class` struct by generating it with `gojson`
 - Changed: Renamed struct `DefaultClient` to `Client`
 
