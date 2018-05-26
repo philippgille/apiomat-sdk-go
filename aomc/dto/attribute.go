@@ -1,7 +1,7 @@
-package aomc
+package dto
 
-// RawAttribute struct generated with gojson
-type RawAttribute struct {
+// Attribute struct generated with gojson
+type Attribute struct {
 	AddedFromOtherModule bool   `json:"addedFromOtherModule"`
 	CapitalizedName      string `json:"capitalizedName"`
 	CreatedAt            int64  `json:"createdAt"`

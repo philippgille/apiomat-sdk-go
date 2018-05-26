@@ -7,16 +7,18 @@ import (
 	"testing"
 
 	"github.com/philippgille/apiomat-go/aomc"
+	"github.com/philippgille/apiomat-go/aomc/dto"
 )
 
-// TestGetRawClasses tests if aomc.GetRawClasses leads to the correct aoms.Client call and the correct returned JSON
+// TestGetRawClasses tests if aomc.GetRawClasses leads to the correct aoms.Client call
+// and the correct returned slice of structs
 func TestGetRawClasses(t *testing.T) {
 	// Prepare fake data and Get() implementation
-	expected := []aomc.RawClass{
-		aomc.RawClass{
+	expected := []dto.Class{
+		dto.Class{
 			ID: "123",
 		},
-		aomc.RawClass{
+		dto.Class{
 			ID: "456",
 		},
 	}
@@ -48,14 +50,15 @@ func TestGetRawClasses(t *testing.T) {
 	}
 }
 
-// TestGetRawAttributes tests if aomc.GetRawAttributes leads to the correct aoms.Client call and the correct returned JSON
+// TestGetRawAttributes tests if aomc.GetRawAttributes leads to the correct aoms.Client call
+// and the correct returned slice of structs
 func TestGetRawAttributes(t *testing.T) {
 	// Prepare fake data and Get() implementation
-	expected := []aomc.RawAttribute{
-		aomc.RawAttribute{
+	expected := []dto.Attribute{
+		dto.Attribute{
 			ID: "123",
 		},
-		aomc.RawAttribute{
+		dto.Attribute{
 			ID: "456",
 		},
 	}

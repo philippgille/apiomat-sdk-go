@@ -55,10 +55,10 @@ func main() {
 
 ### Build
 
-For updating the ApiOmat customer resource types such as `RawClass`, you can turn example JSON into structs with [gojson](https://github.com/ChimeraCoder/gojson) like this:
+For updating the ApiOmat customer resource types such as `dto.Class`, you can turn example JSON into structs with [gojson](https://github.com/ChimeraCoder/gojson) like this:
 
 ```bash
-gojson -input "json/class.json" -name "RawClass" -o "raw_class.go" -pkg "aomc"
+gojson -input "dto/class.json" -name "Class" -o "dto/class.go" -pkg "dto"
 ```
 
 ## aomu

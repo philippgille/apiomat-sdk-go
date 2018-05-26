@@ -15,10 +15,11 @@ vNext
 
 ### aomc
 
-- Added: Struct `RawAttribute`
-- Added: Method `GetRawAttributes()` for fetching the attributes of a class
-- Changed: Renamed the `Class` struct to `RawClass`
-- Changed: Renamed method `GetClasses()` to `GetRawClasses()`
+- Added: Package `dto` (`github.com/philippgille/apiomat-go/aomc/dto`)
+- Added: Struct `dto.Attribute`
+- Added: Method `(client Client) GetRawAttributes(module string, classId string) ([]dto.Attribute, error)` for fetching the attributes of a class
+- Changed: Moved the `Class` struct to `dto.Class`
+- Changed: Renamed method `GetClasses(...)` to `GetRawClasses(...)`
 
 v0.4.0 (2018-05-21)
 -------------------
