@@ -12,7 +12,9 @@ install:
   - go version
   - go env
   # Get all dependencies
-  - go get -d ./...
+  - go get -d .\...
+  # Dependencies in test seem to be excluded from the previous get
+  - go get github.com/go-test/deep
 
 build_script:
   - go build github.com\philippgille\apiomat-go\aoms
