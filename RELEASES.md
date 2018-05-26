@@ -16,10 +16,16 @@ vNext
 ### aomc
 
 - Added: Package `dto` (`github.com/philippgille/apiomat-go/aomc/dto`)
-- Added: Struct `dto.Attribute`
-- Added: Method `(client Client) GetRawAttributes(module string, classId string) ([]dto.Attribute, error)` for fetching the attributes of a class
-- Changed: Moved the `Class` struct to `dto.Class`
-- Changed: Renamed method `GetClasses(...)` to `GetRawClasses(...)`
+- Added: Struct `dto.Attribute`, which represents a raw ApiOmat "MetaModelAttribute"
+- Added: Method `(client Client) GetRawAttributes(module string, classId string) ([]dto.Attribute, error)` for fetching the raw attributes of a class
+- Added: Struct `Class`, which is a convenience type which includes attribute objects and with better names and field types and other advantages over the raw one
+- Added: Struct `Attribute`, which is a convenience type with better names and field types and other advantages over the raw one
+- Added: Method `(client Client) GetClasses(module string) ([]Class, error)`, which fetches classes of a module and adds `Attribute` objects to them
+- Added: Method `(client Client) GetAttributes(module string, classId string)` for fetching the attributes of a class
+- Added: Function `ConvertClassFromDto(rawClass dto.Class) Class` for converting class DTOs into the `Class` convenience type
+- Added: Function `ConvertAttributeFromDto(rawAttribute dto.Attribute) Attribute` for converting attribute DTOs into the `Attribute` convenience type
+- Changed: Moved old / raw struct `Class` to `dto.Class`
+- Changed: Renamed old method `GetClasses(...)` to `GetRawClasses(...)`
 
 v0.4.0 (2018-05-21)
 -------------------
