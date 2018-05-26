@@ -11,6 +11,7 @@ vNext
 ### aoms
 
 - Added: Function `ConvertUnixMillisToTime()`
+- Added: Function `MustUrl(url *url.URL, err error) *url.URL` for parsing and dereferencing a URL in one line
 
 ### aomc
 

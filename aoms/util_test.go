@@ -2,6 +2,7 @@ package aoms_test
 
 import (
 	"fmt"
+	"net/url"
 	"reflect"
 	"testing"
 	"time"
@@ -38,4 +39,22 @@ func TestConvertUnixMillisToTime(t *testing.T) {
 	if now.Year() != actual.Year() {
 		t.Errorf("expected %v, but was %v", now.Year(), actual.Year())
 	}
+}
+
+func TestMustUrl(t *testing.T) {
+	// Test valid URL
+	urlString := "https://fake.url"
+	urlVal := aoms.MustUrl(url.Parse(urlString))
+	if urlString != urlVal.String() {
+		t.Errorf("expected %v, but was %v", urlString, *urlVal)
+	}
+
+	// Test invalid URL
+	defer func() {
+		if r := recover(); r == nil {
+			t.Error("no panic occured, but was expected")
+		}
+	}()
+	urlString = "://invalid.url" // While an empty string IS allowed (might be relative URL), an ":" at index 0 is NOT allowed
+	urlVal = aoms.MustUrl(url.Parse(urlString))
 }
