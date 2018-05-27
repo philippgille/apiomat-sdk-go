@@ -7,13 +7,27 @@
     "version": "0.2.0",
     "configurations": [
 		{
-			"name": "Launch",
+			"name": "Test",
 			"type": "go",
 			"request": "launch",
-			"mode": "test", // "debug" for compile and attach debugger to main program. "test" for debugging tests.
+			"mode": "test",
 			"program": "${fileDirname}",
 			"env": {},
 			"args": [],
+            "showLog": true,
+            // Remote debugging only
+			"remotePath": "",
+			"host": "127.0.0.1",
+			"port": 2345
+		},
+		{
+			"name": "CLI",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"program": "${workspaceRoot}/aom/main.go",
+			"env": {},
+			"args": ["class","ls","--module","Golang","--baseUrl","https://epdemo.apiomat.enterprises/yambas/rest","--username","gille","--password",""],
             "showLog": true,
             // Remote debugging only
 			"remotePath": "",
