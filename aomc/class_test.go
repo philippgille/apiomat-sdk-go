@@ -104,14 +104,14 @@ func TestGetClasses(t *testing.T) {
 	hrefString := "https://fake.url"
 	expectedUrl, _ := url.Parse(hrefString)
 	expected := []aomc.Class{
-		// Don't fill all attributes. Just all different types:
+		// Don't fill all fields. Just all different types:
 		// Slice of strings, aomc.Attribute, time, URL, string, bool
 		aomc.Class{
 			AllowedRolesCreate: []string{
 				"someRole",
 			},
 			Attributes: []aomc.Attribute{
-				// Don't fill the attributes with much data, just check if the embedding works.
+				// Don't fill the fields with much data, just check if the embedding works.
 				// Attributes are tested more thoroughly in another test.
 				aomc.Attribute{
 					Id: "123",
@@ -211,6 +211,75 @@ func TestGetClasses(t *testing.T) {
 	client := aomc.NewClient(fakeClient)
 	// Call method to test
 	actual, err := client.GetClasses(moduleName)
+	// Assertions
+	stopOnError(err, t)
+	if diff := deep.Equal(expected, actual); diff != nil {
+		t.Error(diff)
+	}
+}
+
+// TestGetAttributes tests if aomc.GetAttributes leads to the correct aoms.Client call
+// and the correct returned slice of structs
+func TestGetAttributes(t *testing.T) {
+	// Prepare fake data and Get() implementation
+
+	msec := time.Now().UnixNano() >> 6
+	hrefString := "https://fake.url"
+	expectedUrl, _ := url.Parse(hrefString)
+	expected := []aomc.Attribute{
+		// Don't fill all fields. Just all different types:
+		// time, URL, string, bool
+		aomc.Attribute{
+			// Only actual time
+			Created:  aoms.ConvertUnixMillisToTime(msec),
+			Href:     *expectedUrl,
+			Id:       "456",
+			IsBinary: true,
+			// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
+			// leading to a date from year 1970, while this struct leads to the nil value for time, which is year 0001.
+			LastModified: time.Unix(0, 0),
+		},
+		aomc.Attribute{
+			Id: "789",
+			// See above
+			Created:      time.Unix(0, 0),
+			LastModified: time.Unix(0, 0),
+		},
+	}
+	expectedRawAttributes := []dto.Attribute{
+		dto.Attribute{
+			CreatedAt: msec,
+			Href:      hrefString,
+			ID:        "456",
+			Image:     true,
+		},
+		dto.Attribute{
+			ID: "789",
+		},
+	}
+	expectedJsonBytes, err := json.Marshal(expectedRawAttributes)
+	stopOnError(err, t)
+	expectedJson := string(expectedJsonBytes)
+
+	moduleName := "fakeModule"
+	expectedPath := "modules/" + moduleName + "/metamodels/123/attributes"
+	onGet = func(path string, params url.Values) (string, error) {
+		// Assertions
+		if path != expectedPath {
+			t.Errorf("path was %v, but should be %v", path, expectedPath)
+		}
+		if params != nil {
+			t.Errorf("params was %v, but should be %v", params, nil)
+		}
+		// Assertions were okay, return fake data
+		return expectedJson, nil
+	}
+
+	// Create fake client
+	fakeClient := FakeClient{}
+	client := aomc.NewClient(fakeClient)
+	// Call method to test
+	actual, err := client.GetAttributes(moduleName, "123")
 	// Assertions
 	stopOnError(err, t)
 	if diff := deep.Equal(expected, actual); diff != nil {
