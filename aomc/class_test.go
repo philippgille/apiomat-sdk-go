@@ -11,7 +11,6 @@ import (
 
 	"github.com/philippgille/apiomat-go/aomc"
 	"github.com/philippgille/apiomat-go/aomc/dto"
-	"github.com/philippgille/apiomat-go/aoms"
 )
 
 // TestGetRawClasses tests if aomc.GetRawClasses leads to the correct aoms.Client call
@@ -128,7 +127,7 @@ func TestGetClasses(t *testing.T) {
 				},
 			},
 			// Only actual time
-			Created:      aoms.ConvertUnixMillisToTime(msec),
+			Created:      time.Unix(0, msec*int64(time.Millisecond)),
 			Href:         *expectedUrl,
 			Id:           "789",
 			IsDeprecated: true,
@@ -231,7 +230,7 @@ func TestGetAttributes(t *testing.T) {
 		// time, URL, string, bool
 		aomc.Attribute{
 			// Only actual time
-			Created:  aoms.ConvertUnixMillisToTime(msec),
+			Created:  time.Unix(0, msec*int64(time.Millisecond)),
 			Href:     *expectedUrl,
 			Id:       "456",
 			IsBinary: true,

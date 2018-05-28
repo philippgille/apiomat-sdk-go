@@ -2,13 +2,7 @@ package aoms
 
 import (
 	"net/url"
-	"time"
 )
-
-// ConvertUnixMillisToTime converts a Unix epoch timestamp (in ms) into a Go time.Time object.
-func ConvertUnixMillisToTime(msec int64) time.Time {
-	return time.Unix(0, msec<<3)
-}
 
 // MustUrl enables parsing and dereferencing a URL in one line.
 // It returns a panic if err is not nil.

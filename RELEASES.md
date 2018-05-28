@@ -10,7 +10,6 @@ vNext
 
 ### aoms
 
-- Added: Function `ConvertUnixMillisToTime(msec int64) time.Time`, which is easier to understand as `time.Unix(0, msec<<3)`
 - Added: Function `MustUrl(url *url.URL, err error) *url.URL` for parsing and dereferencing a URL in one line
 
 ### aomc

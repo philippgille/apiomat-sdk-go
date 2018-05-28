@@ -180,9 +180,9 @@ func ConvertClassFromDto(rawClass dto.Class) Class {
 	}
 	// Then those that need special attention
 	result.attributesHref = *aoms.MustUrl(url.Parse(rawClass.AttributesHref))
-	result.Created = aoms.ConvertUnixMillisToTime(rawClass.CreatedAt)
+	result.Created = time.Unix(0, rawClass.CreatedAt*int64(time.Millisecond))
 	result.Href = *aoms.MustUrl(url.Parse(rawClass.Href))
-	result.LastModified = aoms.ConvertUnixMillisToTime(rawClass.LastModifiedAt)
+	result.LastModified = time.Unix(0, rawClass.LastModifiedAt*int64(time.Millisecond))
 	result.methodsHref = *aoms.MustUrl(url.Parse(rawClass.MethodsHref))
 	result.moduleHref = *aoms.MustUrl(url.Parse(rawClass.ModuleHref))
 
@@ -211,9 +211,9 @@ func ConvertAttributeFromDto(rawAttribute dto.Attribute) Attribute {
 		Type:              rawAttribute.Type,
 	}
 	// Then those that need special attention
-	result.Created = aoms.ConvertUnixMillisToTime(rawAttribute.CreatedAt)
+	result.Created = time.Unix(0, rawAttribute.CreatedAt*int64(time.Millisecond))
 	result.Href = *aoms.MustUrl(url.Parse(rawAttribute.Href))
-	result.LastModified = aoms.ConvertUnixMillisToTime(rawAttribute.LastModifiedAt)
+	result.LastModified = time.Unix(0, rawAttribute.LastModifiedAt*int64(time.Millisecond))
 	result.metaModelHref = *aoms.MustUrl(url.Parse(rawAttribute.MetaModelHref))
 
 	return result
