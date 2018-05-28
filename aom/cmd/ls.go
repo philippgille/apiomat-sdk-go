@@ -22,7 +22,7 @@ aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yamb
 	Run: func(cmd *cobra.Command, args []string) {
 		client := aomc.NewDefaultClient(baseUrl, username, password, aoms.System(system))
 
-		classes, err := client.GetRawClasses(module)
+		classes, err := client.GetClasses(module)
 		if err != nil {
 			logFatal(err, "An error occurred during fetching the classes of module %v", module)
 		}
