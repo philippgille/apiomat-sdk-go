@@ -23,9 +23,9 @@ import (
 // of a getter to avoid inconsistency.
 type Class struct {
 	// Read only fields
-	Created      time.Time
-	Href         url.URL
 	Id           string
+	Href         url.URL
+	Created      time.Time
 	LastModified time.Time
 	// Writable when creating, not when updating
 	Name string
@@ -63,9 +63,9 @@ type Class struct {
 // a getter to avoid inconsistency.
 type Attribute struct {
 	// Read only fields
-	Created      time.Time
-	Href         url.URL
 	Id           string
+	Href         url.URL
+	Created      time.Time
 	LastModified time.Time
 	// Writable when creating, not when updating
 	Name string
