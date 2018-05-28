@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+v0.5.0 (2018-05-28)
+-------------------
+
 ### aoms
 
 - Added: Function `MustUrl(url *url.URL, err error) *url.URL` for parsing and dereferencing a URL in one line
