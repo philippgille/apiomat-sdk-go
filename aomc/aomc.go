@@ -23,9 +23,9 @@ type Client struct {
 // username, password and system may be empty.
 // If username or password are empty, no HTTP Authorization header is set in the HTTP request.
 // If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
-func NewDefaultClient(baseUrl string, username string, password string, system aoms.System) Client {
+func NewDefaultClient(baseURL string, username string, password string, system aoms.System) Client {
 	return Client{
-		Client: aoms.NewDefaultClient(baseUrl, username, password, system),
+		Client: aoms.NewDefaultClient(baseURL, username, password, system),
 	}
 }
 

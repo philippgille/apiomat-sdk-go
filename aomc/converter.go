@@ -17,7 +17,7 @@ func ConvertClassFromDto(rawClass dto.Class) Class {
 		AllowedRolesGrant:      rawClass.AllowedRolesGrant,
 		AllowedRolesRead:       rawClass.AllowedRolesRead,
 		AllowedRolesWrite:      rawClass.AllowedRolesWrite,
-		Id:                     rawClass.ID,
+		ID:                     rawClass.ID,
 		IsGlobal:               rawClass.IsGlobal,
 		IsDeprecated:           rawClass.Deprecated,
 		IsInvisible:            rawClass.IsInvisible,
@@ -31,12 +31,12 @@ func ConvertClassFromDto(rawClass dto.Class) Class {
 		UseOwnAuth:             rawClass.UseOwnAuth,
 	}
 	// Then those that need special attention
-	result.attributesHref = *aoms.MustUrl(url.Parse(rawClass.AttributesHref))
+	result.attributesURL = *aoms.MustUrl(url.Parse(rawClass.AttributesHref))
 	result.Created = time.Unix(0, rawClass.CreatedAt*int64(time.Millisecond))
-	result.Href = *aoms.MustUrl(url.Parse(rawClass.Href))
+	result.URL = *aoms.MustUrl(url.Parse(rawClass.Href))
 	result.LastModified = time.Unix(0, rawClass.LastModifiedAt*int64(time.Millisecond))
-	result.methodsHref = *aoms.MustUrl(url.Parse(rawClass.MethodsHref))
-	result.moduleHref = *aoms.MustUrl(url.Parse(rawClass.ModuleHref))
+	result.methodsURL = *aoms.MustUrl(url.Parse(rawClass.MethodsHref))
+	result.moduleURL = *aoms.MustUrl(url.Parse(rawClass.ModuleHref))
 
 	return result
 }
@@ -45,8 +45,8 @@ func ConvertClassFromDto(rawClass dto.Class) Class {
 func ConvertAttributeFromDto(rawAttribute dto.Attribute) Attribute {
 	result := Attribute{
 		// First go through all fields of the raw class that can be copied
+		ID:                rawAttribute.ID,
 		IsDeprecated:      rawAttribute.Deprecated,
-		Id:                rawAttribute.ID,
 		IsBinary:          rawAttribute.Image,
 		IsCollection:      rawAttribute.IsCollection,
 		IsEmbedded:        rawAttribute.IsEmbeddedObject,
@@ -64,9 +64,9 @@ func ConvertAttributeFromDto(rawAttribute dto.Attribute) Attribute {
 	}
 	// Then those that need special attention
 	result.Created = time.Unix(0, rawAttribute.CreatedAt*int64(time.Millisecond))
-	result.Href = *aoms.MustUrl(url.Parse(rawAttribute.Href))
+	result.URL = *aoms.MustUrl(url.Parse(rawAttribute.Href))
 	result.LastModified = time.Unix(0, rawAttribute.LastModifiedAt*int64(time.Millisecond))
-	result.metaModelHref = *aoms.MustUrl(url.Parse(rawAttribute.MetaModelHref))
+	result.metaModelURL = *aoms.MustUrl(url.Parse(rawAttribute.MetaModelHref))
 
 	return result
 }

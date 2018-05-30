@@ -24,8 +24,8 @@ func TestConvertClassFromDto(t *testing.T) {
 		},
 		// Only actual time
 		Created:      time.Unix(0, msec*int64(time.Millisecond)),
-		Href:         *expectedUrl,
-		Id:           "123",
+		URL:          *expectedUrl,
+		ID:           "123",
 		IsDeprecated: true,
 		// See above
 		LastModified: time.Unix(0, 0),
@@ -57,8 +57,8 @@ func TestConvertAttributeFromDto(t *testing.T) {
 	expected := aomc.Attribute{
 		// Only actual time
 		Created:      time.Unix(0, msec*int64(time.Millisecond)),
-		Href:         *expectedUrl,
-		Id:           "123",
+		URL:          *expectedUrl,
+		ID:           "123",
 		IsDeprecated: true,
 		// See above
 		LastModified: time.Unix(0, 0),

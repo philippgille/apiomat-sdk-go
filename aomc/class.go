@@ -22,8 +22,8 @@ import (
 // of a getter to avoid inconsistency.
 type Class struct {
 	// Read only fields
-	Id           string
-	Href         url.URL
+	ID           string
+	URL          url.URL
 	Created      time.Time
 	LastModified time.Time
 	// Writable when creating, not when updating
@@ -45,9 +45,9 @@ type Class struct {
 	RequiredUserRoleWrite  string
 	UseOwnAuth             string
 	// Non-exposed
-	attributesHref url.URL
-	methodsHref    url.URL
-	moduleHref     url.URL
+	attributesURL url.URL
+	methodsURL    url.URL
+	moduleURL     url.URL
 	// Unused
 	//ExtendsGeoModel bool
 }
@@ -62,8 +62,8 @@ type Class struct {
 // a getter to avoid inconsistency.
 type Attribute struct {
 	// Read only fields
-	Id           string
-	Href         url.URL
+	ID           string
+	URL          url.URL
 	Created      time.Time
 	LastModified time.Time
 	// Writable when creating, not when updating
@@ -83,7 +83,7 @@ type Attribute struct {
 	Type          string
 	// Not exposed
 	isFromOtherModule bool
-	metaModelHref     url.URL
+	metaModelURL      url.URL
 	refID             string
 	// Unused
 	//CapitalizedName string
@@ -108,9 +108,9 @@ func (client Client) GetRawClasses(module string) ([]dto.Class, error) {
 
 // GetRawAttributes returns the raw attributes of the given class.
 // "Raw" means the struct is mapped 1:1 to a "MetaModelAttribute" JSON
-func (client Client) GetRawAttributes(module string, classId string) ([]dto.Attribute, error) {
+func (client Client) GetRawAttributes(module string, classID string) ([]dto.Attribute, error) {
 	var result []dto.Attribute
-	jsonString, err := client.Get("modules/"+module+"/metamodels/"+classId+"/attributes", nil)
+	jsonString, err := client.Get("modules/"+module+"/metamodels/"+classID+"/attributes", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ func (client Client) GetClasses(module string) ([]Class, error) {
 		// Convert existing fields
 		elem := ConvertClassFromDto(rawClass)
 		// Fetch and assign attributes
-		elem.Attributes, err = client.GetAttributes(module, elem.Id)
+		elem.Attributes, err = client.GetAttributes(module, elem.ID)
 
 		result = append(result, elem)
 	}
@@ -140,9 +140,9 @@ func (client Client) GetClasses(module string) ([]Class, error) {
 }
 
 // GetAttributes returns the attributes of the given class in the given module.
-func (client Client) GetAttributes(module string, classId string) ([]Attribute, error) {
+func (client Client) GetAttributes(module string, classID string) ([]Attribute, error) {
 	result := []Attribute{}
-	rawAttributes, err := client.GetRawAttributes(module, classId)
+	rawAttributes, err := client.GetRawAttributes(module, classID)
 	if err != nil {
 		return nil, err
 	}

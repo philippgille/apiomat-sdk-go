@@ -113,14 +113,14 @@ func TestGetClasses(t *testing.T) {
 				// Don't fill the fields with much data, just check if the embedding works.
 				// Attributes are tested more thoroughly in another test.
 				aomc.Attribute{
-					Id: "123",
+					ID: "123",
 					// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
 					// leading to a date from year 1970, while this struct leads to the nil value for time, which is year 0001.
 					Created:      time.Unix(0, 0),
 					LastModified: time.Unix(0, 0),
 				},
 				aomc.Attribute{
-					Id: "456",
+					ID: "456",
 					// See above
 					Created:      time.Unix(0, 0),
 					LastModified: time.Unix(0, 0),
@@ -128,15 +128,15 @@ func TestGetClasses(t *testing.T) {
 			},
 			// Only actual time
 			Created:      time.Unix(0, msec*int64(time.Millisecond)),
-			Href:         *expectedUrl,
-			Id:           "789",
+			URL:          *expectedUrl,
+			ID:           "789",
 			IsDeprecated: true,
 			// See above
 			LastModified: time.Unix(0, 0),
 		},
 		aomc.Class{
 			Attributes: []aomc.Attribute{},
-			Id:         "101",
+			ID:         "101",
 			// See above
 			Created:      time.Unix(0, 0),
 			LastModified: time.Unix(0, 0),
@@ -231,15 +231,15 @@ func TestGetAttributes(t *testing.T) {
 		aomc.Attribute{
 			// Only actual time
 			Created:  time.Unix(0, msec*int64(time.Millisecond)),
-			Href:     *expectedUrl,
-			Id:       "456",
+			URL:      *expectedUrl,
+			ID:       "456",
 			IsBinary: true,
 			// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
 			// leading to a date from year 1970, while this struct leads to the nil value for time, which is year 0001.
 			LastModified: time.Unix(0, 0),
 		},
 		aomc.Attribute{
-			Id: "789",
+			ID: "789",
 			// See above
 			Created:      time.Unix(0, 0),
 			LastModified: time.Unix(0, 0),
