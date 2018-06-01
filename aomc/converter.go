@@ -22,6 +22,18 @@ func ConvertRawClassesFromJSON(jsonString string) ([]dto.Class, error) {
 	return result, nil
 }
 
+// ConvertRawClassFromJSON converts a JSON object into a dto.Class object.
+// Having an extra function that wraps json.Unmarshal(...) allows us to call the function in tests
+// and change the JSON library later without having to change the tests.
+func ConvertRawClassFromJSON(jsonString string) (dto.Class, error) {
+	var result dto.Class
+	err := json.Unmarshal([]byte(jsonString), &result)
+	if err != nil {
+		return dto.Class{}, errors.Wrapf(err, "Couldn't unmarshal the JSON: %v", jsonString)
+	}
+	return result, nil
+}
+
 // ConvertRawAttributesFromJSON converts a JSON array into a slice of dto.Attribute objects.
 // Having an extra function that wraps json.Unmarshal(...) allows us to call the function in tests
 // and change the JSON library later without having to change the tests.
@@ -30,6 +42,18 @@ func ConvertRawAttributesFromJSON(jsonString string) ([]dto.Attribute, error) {
 	err := json.Unmarshal([]byte(jsonString), &result)
 	if err != nil {
 		return nil, errors.Wrapf(err, "Couldn't unmarshal the JSON: %v", jsonString)
+	}
+	return result, nil
+}
+
+// ConvertRawAttributeFromJSON converts a JSON object into a dto.Attribute object.
+// Having an extra function that wraps json.Unmarshal(...) allows us to call the function in tests
+// and change the JSON library later without having to change the tests.
+func ConvertRawAttributeFromJSON(jsonString string) (dto.Attribute, error) {
+	var result dto.Attribute
+	err := json.Unmarshal([]byte(jsonString), &result)
+	if err != nil {
+		return dto.Attribute{}, errors.Wrapf(err, "Couldn't unmarshal the JSON: %v", jsonString)
 	}
 	return result, nil
 }

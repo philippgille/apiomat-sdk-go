@@ -43,23 +43,55 @@ func TestConvertRawClassesFromJSON(t *testing.T) {
 		},
 	}
 	given := `
-	[
-		{
-			"createdAt":` + strconv.FormatInt(msec1, 10) + `,
-			"allowedRolesCreate": ["` + role1 + `"],
-			"deprecated": ` + strconv.FormatBool(deprecated1) + `,
-			"attributesHref": "` + hrefString1 + `"
-		},
-		{
-			"createdAt":` + strconv.FormatInt(msec2, 10) + `,
-			"allowedRolesCreate": ["` + role2 + `"],
-			"deprecated": ` + strconv.FormatBool(deprecated2) + `,
-			"attributesHref": "` + hrefString2 + `"
-		}
-	]`
+		[
+			{
+				"createdAt":` + strconv.FormatInt(msec1, 10) + `,
+				"allowedRolesCreate": ["` + role1 + `"],
+				"deprecated": ` + strconv.FormatBool(deprecated1) + `,
+				"attributesHref": "` + hrefString1 + `"
+			},
+			{
+				"createdAt":` + strconv.FormatInt(msec2, 10) + `,
+				"allowedRolesCreate": ["` + role2 + `"],
+				"deprecated": ` + strconv.FormatBool(deprecated2) + `,
+				"attributesHref": "` + hrefString2 + `"
+			}
+		]`
 
 	// Test
 	actual, err := aomc.ConvertRawClassesFromJSON(given)
+	stopOnError(err, t)
+	if diff := deep.Equal(expected, actual); diff != nil {
+		t.Error(diff)
+	}
+}
+
+func TestConvertRawClassFromJSON(t *testing.T) {
+	// Prep
+	// Not all fields must be tested, but one for each type.
+	// []string, string, int64, bool
+	role := "someRole1"
+	hrefString := "https://fake1.url"
+	msec := time.Now().UnixNano() / int64(time.Millisecond)
+	deprecated := true
+	expected := dto.Class{
+		AllowedRolesCreate: []string{
+			role,
+		},
+		AttributesHref: hrefString,
+		CreatedAt:      msec,
+		Deprecated:     deprecated,
+	}
+	given := `
+		{
+			"createdAt":` + strconv.FormatInt(msec, 10) + `,
+			"allowedRolesCreate": ["` + role + `"],
+			"deprecated": ` + strconv.FormatBool(deprecated) + `,
+			"attributesHref": "` + hrefString + `"
+		}`
+
+	// Test
+	actual, err := aomc.ConvertRawClassFromJSON(given)
 	stopOnError(err, t)
 	if diff := deep.Equal(expected, actual); diff != nil {
 		t.Error(diff)
@@ -104,6 +136,33 @@ func TestConvertRawAttributesFromJSON(t *testing.T) {
 
 	// Test
 	actual, err := aomc.ConvertRawAttributesFromJSON(given)
+	stopOnError(err, t)
+	if diff := deep.Equal(expected, actual); diff != nil {
+		t.Error(diff)
+	}
+}
+
+func TestConvertRawAttributeFromJSON(t *testing.T) {
+	// Prep
+	// Not all fields must be tested, but one for each type.
+	// bool, string, int64
+	added := true
+	capName := "Foo"
+	msec := time.Now().UnixNano() / int64(time.Millisecond)
+	expected := dto.Attribute{
+		AddedFromOtherModule: added,
+		CapitalizedName:      capName,
+		CreatedAt:            msec,
+	}
+	given := `
+		{
+			"createdAt":` + strconv.FormatInt(msec, 10) + `,
+			"addedFromOtherModule": ` + strconv.FormatBool(added) + `,
+			"capitalizedName": "` + capName + `"
+		}`
+
+	// Test
+	actual, err := aomc.ConvertRawAttributeFromJSON(given)
 	stopOnError(err, t)
 	if diff := deep.Equal(expected, actual); diff != nil {
 		t.Error(diff)
