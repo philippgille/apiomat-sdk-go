@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+v0.6.0 (2018-06-02)
+-------------------
+
 ### aoms
 
 - Changed: Renamed package `aoms` to `aomx` to better reflect the cross cutting functionality
