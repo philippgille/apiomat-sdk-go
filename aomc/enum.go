@@ -5,10 +5,6 @@ package aomc
 // It's restricted to a few specific values (see the constants).
 type AuthImplStatus string
 
-func (s *AuthImplStatus) String() string {
-	return string(*s)
-}
-
 // AuthImplStatus values
 const (
 	Unknown AuthImplStatus = "UNKNOWN"
@@ -16,16 +12,16 @@ const (
 	No      AuthImplStatus = "NO"
 )
 
+func (s *AuthImplStatus) String() string {
+	return string(*s)
+}
+
 // UserRole is a string containing the role that's required to C/R/U/D an object of a class.
 // It's used for example in a class' "RequiredRoleCreate".
 // When a UserRole is set to "AppAdmin", the "AllowedRolesCreate" kick in.
 // This doesn't make much sense, but it's defined that way by ApiOmat.
 // The string is restricted to a few specific values (see the constants).
 type UserRole string
-
-func (s *UserRole) String() string {
-	return string(*s)
-}
 
 // UserRole values
 const (
@@ -36,3 +32,7 @@ const (
 	OrgAdmin   UserRole = "OrgAdmin"
 	SuperAdmin UserRole = "SuperAdmin"
 )
+
+func (s *UserRole) String() string {
+	return string(*s)
+}
