@@ -13,7 +13,7 @@ import (
 	"github.com/philippgille/apiomat-go/aomc/dto"
 )
 
-// TestGetRawClasses tests if aomc.GetRawClasses leads to the correct aoms.Client call
+// TestGetRawClasses tests if aomc.GetRawClasses leads to the correct aomx.Client call
 // and the correct returned slice of structs
 func TestGetRawClasses(t *testing.T) {
 	// Prepare fake data and Get() implementation
@@ -53,7 +53,7 @@ func TestGetRawClasses(t *testing.T) {
 	}
 }
 
-// TestGetRawAttributes tests if aomc.GetRawAttributes leads to the correct aoms.Client call
+// TestGetRawAttributes tests if aomc.GetRawAttributes leads to the correct aomx.Client call
 // and the correct returned slice of structs
 func TestGetRawAttributes(t *testing.T) {
 	// Prepare fake data and Get() implementation
@@ -94,7 +94,7 @@ func TestGetRawAttributes(t *testing.T) {
 	}
 }
 
-// TestGetClasses tests if aomc.GetClasses leads to the correct aoms.Client call
+// TestGetClasses tests if aomc.GetClasses leads to the correct aomx.Client call
 // and the correct returned slice of structs
 func TestGetClasses(t *testing.T) {
 	// Prepare fake data and Get() implementation
@@ -214,7 +214,7 @@ func TestGetClasses(t *testing.T) {
 	}
 }
 
-// TestGetAttributes tests if aomc.GetAttributes leads to the correct aoms.Client call
+// TestGetAttributes tests if aomc.GetAttributes leads to the correct aomx.Client call
 // and the correct returned slice of structs
 func TestGetAttributes(t *testing.T) {
 	// Prepare fake data and Get() implementation

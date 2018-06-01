@@ -1,15 +1,15 @@
 /*
-Package aoms contains common functionality for sending HTTP requests to an ApiOmat server.
+Package aomx contains common functionality for sending HTTP requests to an ApiOmat server.
 
-The "s" in aoms is for "shared", because the package is used by the aomc and aomu packages.
+The "x" in aomx is for "cross" (cutting functionality), because the package is used by the aomc and aomu packages.
 Instead of using this package directly, you should use the packages aomc or aomu instead.
 
 If you need some functionality that's not implemented by the aomc and aomu packages you can use this package like this:
-1. Create a client with aoms.NewDefaultClient()
+1. Create a client with aomx.NewDefaultClient()
 2. Call the client's Get() method to send an HTTP GET request to an ApiOmat URL of your choice
 3. The returned string is JSON which you can parse and work with
 */
-package aoms
+package aomx
 
 import (
 	"io/ioutil"
@@ -35,7 +35,7 @@ type Client interface {
 }
 
 // DefaultClient is a client for ApiOmat, which implements the Client interface.
-// You should create a DefaultClient object with aoms.NewDefaultClient().
+// You should create a DefaultClient object with aomx.NewDefaultClient().
 type DefaultClient struct {
 	// ApiOmat base URL, for example: "https://epdemo.apiomat.enterprises/yambas/rest"
 	baseUrl  string

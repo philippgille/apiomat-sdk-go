@@ -10,27 +10,27 @@ You can use the package like this:
 package aomc
 
 import (
-	"github.com/philippgille/apiomat-go/aoms"
+	"github.com/philippgille/apiomat-go/aomx"
 )
 
 // Client is a client for ApiOmat customer resources
 type Client struct {
 	// Embedded anonymous type
-	aoms.Client
+	aomx.Client
 }
 
-// NewDefaultClient creates a new ApiOmat client with an underlying aoms.DefaultClient.
+// NewDefaultClient creates a new ApiOmat client with an underlying aomx.DefaultClient.
 // username, password and system may be empty.
 // If username or password are empty, no HTTP Authorization header is set in the HTTP request.
 // If system is empty, no "X-Apiomat-System" header is set in the HTTP request, leading to "LIVE" being used as default by ApiOmat.
-func NewDefaultClient(baseURL string, username string, password string, system aoms.System) Client {
+func NewDefaultClient(baseURL string, username string, password string, system aomx.System) Client {
 	return Client{
-		Client: aoms.NewDefaultClient(baseURL, username, password, system),
+		Client: aomx.NewDefaultClient(baseURL, username, password, system),
 	}
 }
 
-// NewClient creates a new ApiOmat client with a given client that implements the aoms.Client interface.
-func NewClient(client aoms.Client) Client {
+// NewClient creates a new ApiOmat client with a given client that implements the aomx.Client interface.
+func NewClient(client aomx.Client) Client {
 	return Client{
 		Client: client,
 	}

@@ -1,19 +1,19 @@
-package aoms_test
+package aomx_test
 
 import (
 	"testing"
 
-	"github.com/philippgille/apiomat-go/aoms"
+	"github.com/philippgille/apiomat-go/aomx"
 )
 
 func TestSystem(t *testing.T) {
 	cases := []struct {
-		sys  aoms.System
+		sys  aomx.System
 		want string
 	}{
-		{aoms.Live, "LIVE"},
-		{aoms.Staging, "STAGING"},
-		{aoms.Test, "TEST"},
+		{aomx.Live, "LIVE"},
+		{aomx.Staging, "STAGING"},
+		{aomx.Test, "TEST"},
 	}
 	for _, c := range cases {
 		got := c.sys.String()
@@ -24,8 +24,8 @@ func TestSystem(t *testing.T) {
 }
 
 func TestSystemCast(t *testing.T) {
-	want := aoms.Live
-	got := aoms.System("LIVE")
+	want := aomx.Live
+	got := aomx.System("LIVE")
 	if got != want {
 		t.Errorf("got %q, want %q", got, want)
 	}

@@ -1,16 +1,16 @@
-package aoms_test
+package aomx_test
 
 import (
 	"net/url"
 	"testing"
 
-	"github.com/philippgille/apiomat-go/aoms"
+	"github.com/philippgille/apiomat-go/aomx"
 )
 
 func TestMustUrl(t *testing.T) {
 	// Test valid URL
 	urlString := "https://fake.url"
-	urlVal := aoms.MustUrl(url.Parse(urlString))
+	urlVal := aomx.MustUrl(url.Parse(urlString))
 	if urlString != urlVal.String() {
 		t.Errorf("expected %v, but was %v", urlString, *urlVal)
 	}
@@ -22,5 +22,5 @@ func TestMustUrl(t *testing.T) {
 		}
 	}()
 	urlString = "://invalid.url" // While an empty string IS allowed (might be relative URL), an ":" at index 0 is NOT allowed
-	urlVal = aoms.MustUrl(url.Parse(urlString))
+	urlVal = aomx.MustUrl(url.Parse(urlString))
 }

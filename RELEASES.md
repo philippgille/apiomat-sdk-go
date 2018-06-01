@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+### aoms
+
+- Changed: Renamed package `aoms` to `aomx` to better reflect the cross cutting functionality
+
 ### aomc
 
 - Added: Functions `ConvertRawClassesFromJSON(...)`, `ConvertRawClassFromJSON(...)`, `ConvertRawAttributesFromJSON(...)` and `ConvertRawAttributeFromJSON(...)` to wrap the current use of `json.Unmarshal(...)` to make this exchangeable in the future without having to change tests, but also for use by SDK users

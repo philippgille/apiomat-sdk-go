@@ -17,11 +17,11 @@ install:
   - go get github.com/go-test/deep
 
 build_script:
-  - go build github.com\philippgille\apiomat-go\aoms
+  - go build github.com\philippgille\apiomat-go\aomx
   - go build github.com\philippgille\apiomat-go\aomc
   # Use an explicit output file to have the same behavior as in Travis CI
   - go build -o aom\aom.exe github.com\philippgille\apiomat-go\aom
 
 test_script:
-  - go test -v github.com\philippgille\apiomat-go\aoms
+  - go test -v github.com\philippgille\apiomat-go\aomx
   - go test -v github.com\philippgille\apiomat-go\aomc

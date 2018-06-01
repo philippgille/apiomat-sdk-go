@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// FakeClient is a fake implementation of the aoms.Client interface.
+// FakeClient is a fake implementation of the aomx.Client interface.
 // Its methods call functions that can be defined by each test on its own.
 type FakeClient struct{}
 

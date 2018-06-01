@@ -1,4 +1,4 @@
-package aoms
+package aomx
 
 import (
 	"net/url"
@@ -18,7 +18,7 @@ import (
 //    urlVal = *tempPtr
 //
 //    // With this method though:
-//    urlVal = *aoms.MustUrl(url.Parse(urlString))
+//    urlVal = *aomx.MustUrl(url.Parse(urlString))
 func MustUrl(url *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)

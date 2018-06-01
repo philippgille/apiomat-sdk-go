@@ -10,19 +10,19 @@ Under construction!
 
 ## Contents
 
-- [aoms - Package with shared functionality for sending requests to ApiOmat](#aoms)
+- [aomx - Package with shared functionality for sending requests to ApiOmat](#aomx)
 - [aomc - Package for handling "customer" resources during design-time](#aomc)
 - [aomu - Package for handling "user" resources during runtime](#aomu)
 - [aom - CLI for handling both "customer" and "user" resources](#aom)
 
-## aoms
+## aomx
 
-Package aoms contains common functionality for sending HTTP requests to an ApiOmat server.
+Package aomx contains common functionality for sending HTTP requests to an ApiOmat server.
 
-The "s" in aoms is for "shared", because the package is used by the aomc and aomu packages.
-Instead of using this package directly, you should use the packages aomc or aomu instead.
+The "x" in aomx is for "cross" (cutting functionality), because the package is used by the aomc and aomu packages.
+Instead of using this package directly, you should use the packages `aomc` or `aomu` instead.
 
-[![GoDoc](https://godoc.org/github.com/philippgille/apiomat-go/aoms?status.svg)](https://godoc.org/github.com/philippgille/apiomat-go/aoms)
+[![GoDoc](https://godoc.org/github.com/philippgille/apiomat-go/aomx?status.svg)](https://godoc.org/github.com/philippgille/apiomat-go/aomx)
 
 ## aomc
 

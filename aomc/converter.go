@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/philippgille/apiomat-go/aomc/dto"
-	"github.com/philippgille/apiomat-go/aoms"
+	"github.com/philippgille/apiomat-go/aomx"
 	"github.com/pkg/errors"
 )
 
@@ -81,11 +81,11 @@ func ConvertClassFromDto(rawClass dto.Class) Class {
 		RequiredRoleGrant:          UserRole(rawClass.RequiredUserRoleGrant),
 		RequiredRoleRead:           UserRole(rawClass.RequiredUserRoleRead),
 		RequiredRoleWrite:          UserRole(rawClass.RequiredUserRoleWrite),
-		URL:                        *aoms.MustUrl(url.Parse(rawClass.Href)),
+		URL:                        *aomx.MustUrl(url.Parse(rawClass.Href)),
 		// Unexported
-		attributesURL: *aoms.MustUrl(url.Parse(rawClass.AttributesHref)),
-		methodsURL:    *aoms.MustUrl(url.Parse(rawClass.MethodsHref)),
-		moduleURL:     *aoms.MustUrl(url.Parse(rawClass.ModuleHref)),
+		attributesURL: *aomx.MustUrl(url.Parse(rawClass.AttributesHref)),
+		methodsURL:    *aomx.MustUrl(url.Parse(rawClass.MethodsHref)),
+		moduleURL:     *aomx.MustUrl(url.Parse(rawClass.ModuleHref)),
 	}
 }
 
@@ -109,10 +109,10 @@ func ConvertAttributeFromDto(rawAttribute dto.Attribute) Attribute {
 		Name:          rawAttribute.Name,
 		RoleForUpdate: rawAttribute.RoleForUpdate,
 		Type:          rawAttribute.Type,
-		URL:           *aoms.MustUrl(url.Parse(rawAttribute.Href)),
+		URL:           *aomx.MustUrl(url.Parse(rawAttribute.Href)),
 		// Unexported
 		isFromOtherModule: rawAttribute.AddedFromOtherModule,
-		metaModelURL:      *aoms.MustUrl(url.Parse(rawAttribute.MetaModelHref)),
+		metaModelURL:      *aomx.MustUrl(url.Parse(rawAttribute.MetaModelHref)),
 		refID:             rawAttribute.RefID,
 	}
 }
