@@ -20,7 +20,7 @@ ls is a command for listing classes of a given module.
 For example, to list all classes of module "MyModule":
 aom class ls --module "MyModule" --baseUrl "https://apiomat.yourcompany.com/yambas/rest" --username "john" --password "secret"`,
 	Run: func(cmd *cobra.Command, args []string) {
-		client := aomc.NewDefaultClient(baseUrl, username, password, aomx.System(system))
+		client := aomc.NewDefaultClient(baseURL, username, password, aomx.System(system))
 
 		classes, err := client.GetClasses(module)
 		if err != nil {

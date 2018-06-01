@@ -17,7 +17,7 @@ var versionCmd = &cobra.Command{
 For example:
 aom version --baseUrl "https://apiomat.yourcompany.com/yambas/rest"`,
 	Run: func(cmd *cobra.Command, args []string) {
-		client := aomx.NewDefaultClient(baseUrl, "", "", "")
+		client := aomx.NewDefaultClient(baseURL, "", "", "")
 
 		version, err := client.GetVersion()
 		if err != nil {
@@ -31,5 +31,5 @@ aom version --baseUrl "https://apiomat.yourcompany.com/yambas/rest"`,
 func init() {
 	rootCmd.AddCommand(versionCmd)
 
-	registerBaseUrl(versionCmd)
+	registerBaseURL(versionCmd)
 }

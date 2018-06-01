@@ -12,7 +12,7 @@ import (
 // Add "+" after release commits.
 const version = "v0.5.0"
 
-var baseUrl string
+var baseURL string
 var username string
 var password string
 var system string
@@ -89,12 +89,12 @@ func logFatal(err error, format string, v ...interface{}) {
 	os.Exit(1)
 }
 
-func registerBaseUrl(command *cobra.Command) {
-	command.PersistentFlags().StringVar(&baseUrl, "baseUrl", "http://localhost:8080/yambas/rest", "Base URL")
+func registerBaseURL(command *cobra.Command) {
+	command.PersistentFlags().StringVar(&baseURL, "baseUrl", "http://localhost:8080/yambas/rest", "Base URL")
 }
 
 func registerCommonFlags(command *cobra.Command) {
-	registerBaseUrl(command)
+	registerBaseURL(command)
 	command.PersistentFlags().StringVar(&username, "username", "apinaut", "Username")
 	command.PersistentFlags().StringVar(&password, "password", "secret", "Password")
 	command.PersistentFlags().StringVar(&system, "system", "", "System (no default value, leads to the ApiOmat server using LIVE)")
