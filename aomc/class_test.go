@@ -99,13 +99,20 @@ func TestGetRawAttributes(t *testing.T) {
 func TestGetClasses(t *testing.T) {
 	// Prepare fake data and Get() implementation
 
-	msec := time.Now().UnixNano() >> 6
+	msec := time.Now().UnixNano() / int64(time.Millisecond)
 	hrefString := "https://fake.url"
 	expectedUrl, _ := url.Parse(hrefString)
 	expected := []aomc.Class{
-		// Don't fill all fields. Just all different types:
+		// Don't fill all fields. Just a few different types:
 		// Slice of strings, aomc.Attribute, time, URL, string, bool
+		// A complete set of types is tested in converter_test.
 		aomc.Class{
+			ID:      "789",
+			URL:     *expectedUrl,
+			Created: time.Unix(0, msec*int64(time.Millisecond)), // Only actual time
+			// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
+			// leading to a date from year 1970, while this struct leads to the nil value for time, which is year 0001.
+			LastModified: time.Unix(0, 0),
 			AllowedRolesCreate: []string{
 				"someRole",
 			},
@@ -113,33 +120,23 @@ func TestGetClasses(t *testing.T) {
 				// Don't fill the fields with much data, just check if the embedding works.
 				// Attributes are tested more thoroughly in another test.
 				aomc.Attribute{
-					ID: "123",
-					// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
-					// leading to a date from year 1970, while this struct leads to the nil value for time, which is year 0001.
-					Created:      time.Unix(0, 0),
-					LastModified: time.Unix(0, 0),
+					ID:           "123",
+					Created:      time.Unix(0, 0), // See above
+					LastModified: time.Unix(0, 0), // See above
 				},
 				aomc.Attribute{
-					ID: "456",
-					// See above
-					Created:      time.Unix(0, 0),
-					LastModified: time.Unix(0, 0),
+					ID:           "456",
+					Created:      time.Unix(0, 0), // See above
+					LastModified: time.Unix(0, 0), // See above
 				},
 			},
-			// Only actual time
-			Created:      time.Unix(0, msec*int64(time.Millisecond)),
-			URL:          *expectedUrl,
-			ID:           "789",
 			IsDeprecated: true,
-			// See above
-			LastModified: time.Unix(0, 0),
 		},
 		aomc.Class{
-			Attributes: []aomc.Attribute{},
-			ID:         "101",
-			// See above
-			Created:      time.Unix(0, 0),
-			LastModified: time.Unix(0, 0),
+			ID:           "101",
+			Created:      time.Unix(0, 0), // See above
+			LastModified: time.Unix(0, 0), // See above
+			Attributes:   []aomc.Attribute{},
 		},
 	}
 	expectedRawClasses := []dto.Class{
@@ -222,27 +219,26 @@ func TestGetClasses(t *testing.T) {
 func TestGetAttributes(t *testing.T) {
 	// Prepare fake data and Get() implementation
 
-	msec := time.Now().UnixNano() >> 6
+	msec := time.Now().UnixNano() / int64(time.Millisecond)
 	hrefString := "https://fake.url"
 	expectedUrl, _ := url.Parse(hrefString)
 	expected := []aomc.Attribute{
 		// Don't fill all fields. Just all different types:
-		// time, URL, string, bool
+		// string, net.URL, time.Time, bool
 		aomc.Attribute{
+			ID:  "456",
+			URL: *expectedUrl,
 			// Only actual time
-			Created:  time.Unix(0, msec*int64(time.Millisecond)),
-			URL:      *expectedUrl,
-			ID:       "456",
-			IsBinary: true,
+			Created: time.Unix(0, msec*int64(time.Millisecond)),
 			// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
 			// leading to a date from year 1970, while this struct leads to the nil value for time, which is year 0001.
 			LastModified: time.Unix(0, 0),
+			IsBinary:     true,
 		},
 		aomc.Attribute{
-			ID: "789",
-			// See above
-			Created:      time.Unix(0, 0),
-			LastModified: time.Unix(0, 0),
+			ID:           "789",
+			Created:      time.Unix(0, 0), // See above
+			LastModified: time.Unix(0, 0), // See above
 		},
 	}
 	expectedRawAttributes := []dto.Attribute{

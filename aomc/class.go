@@ -1,11 +1,8 @@
 package aomc
 
 import (
-	"encoding/json"
 	"net/url"
 	"time"
-
-	"github.com/pkg/errors"
 
 	"github.com/philippgille/apiomat-go/aomc/dto"
 )
@@ -29,21 +26,21 @@ type Class struct {
 	// Writable when creating, not when updating
 	Name string
 	// Readable and writable
-	AllowedRolesCreate     []string
-	AllowedRolesGrant      []string
-	AllowedRolesRead       []string
-	AllowedRolesWrite      []string
-	Attributes             []Attribute
-	IsDeprecated           bool
-	IsGlobal               bool
-	IsInvisible            bool
-	IsRestrictBinaryAccess bool // Corresponds to "restrictResourceAccess" in the JSON
-	IsTransient            bool
-	RequiredUserRoleCreate string
-	RequiredUserRoleGrant  string
-	RequiredUserRoleRead   string
-	RequiredUserRoleWrite  string
-	UseOwnAuth             string
+	AllowedRolesCreate         []string
+	AllowedRolesGrant          []string
+	AllowedRolesRead           []string
+	AllowedRolesWrite          []string
+	Attributes                 []Attribute
+	AuthImplStatus             AuthImplStatus
+	IsCopyRolesToBinAttributes bool // Corresponds to "restrictResourceAccess" in the JSON
+	IsDeprecated               bool
+	IsGlobal                   bool
+	IsInvisible                bool
+	IsTransient                bool
+	RequiredRoleCreate         UserRole
+	RequiredRoleGrant          UserRole
+	RequiredRoleRead           UserRole
+	RequiredRoleWrite          UserRole
 	// Non-exposed
 	attributesURL url.URL
 	methodsURL    url.URL
@@ -92,16 +89,14 @@ type Attribute struct {
 
 // GetRawClasses returns the raw classes of the given module.
 // "Raw" means the struct is mapped 1:1 to a "MetaModel" JSON, without embedded attribute structs for example.
-// Example return value: [{AllowedRolesCreate:[] AllowedRolesGrant:[] ...} {...}]
 func (client Client) GetRawClasses(module string) ([]dto.Class, error) {
-	var result []dto.Class
 	jsonString, err := client.Get("modules/"+module+"/metamodels", nil)
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal([]byte(jsonString), &result)
+	result, err := ConvertRawClassesFromJSON(jsonString)
 	if err != nil {
-		return nil, errors.Wrapf(err, "Couldn't unmarshal the response body")
+		return nil, err
 	}
 	return result, nil
 }
@@ -109,14 +104,13 @@ func (client Client) GetRawClasses(module string) ([]dto.Class, error) {
 // GetRawAttributes returns the raw attributes of the given class.
 // "Raw" means the struct is mapped 1:1 to a "MetaModelAttribute" JSON
 func (client Client) GetRawAttributes(module string, classID string) ([]dto.Attribute, error) {
-	var result []dto.Attribute
 	jsonString, err := client.Get("modules/"+module+"/metamodels/"+classID+"/attributes", nil)
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal([]byte(jsonString), &result)
+	result, err := ConvertRawAttributesFromJSON(jsonString)
 	if err != nil {
-		return nil, errors.Wrapf(err, "Couldn't unmarshal the response body")
+		return nil, err
 	}
 	return result, nil
 }

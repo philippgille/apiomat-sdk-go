@@ -10,7 +10,10 @@ vNext
 
 ### aomc
 
-- Changed: Renamed some struct fields and parameters to adhere to Go's coding standards
+- Added: Functions `ConvertRawClassesFromJSON(...)`, `ConvertRawAttributesFromJSON(...)` to wrap the current use of `json.Unmarshal(...)` to make this exchangeable in the future without having to change tests, but also for use by SDK users
+- Changed / improved: Change type of `Class` fields `AuthImplStatus` (previously `UseOwnAuth`) and `UserRole` from string to their own type, with constants for use as an enum. They implement `String()` for conversion and printing.
+- Changed: Renamed `Class` and `Attribute` struct fields to better reflect their meaning (the JSON attribute names from ApiOmat are inconsistent and not very expressive in some cases) and to adhere to Go's coding standards
+- Changed: Renamed parameters of some functions and methods to adhere to Go's coding standards
 
 v0.5.0 (2018-05-28)
 -------------------
