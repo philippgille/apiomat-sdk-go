@@ -11,6 +11,7 @@ vNext
 ### aomc
 
 - Added: Method `(client Client) GetRawClassByName(module string, name string) (dto.Class, error)` for getting a single class DTO with a given name
+- Added: Method `(client Client) GetClassByName(module string, name string) (Class, error)` for getting a single class with a given name
 
 v0.6.0 (2018-06-02)
 -------------------

@@ -63,10 +63,7 @@ func TestGetRawClassByName(t *testing.T) {
 		Name: className,
 	}
 	dtosForExpectedJson := []dto.Class{
-		dto.Class{
-			ID:   "123",
-			Name: className,
-		},
+		expected,
 		dto.Class{
 			ID:   "456",
 			Name: "Bar",
@@ -254,6 +251,119 @@ func TestGetClasses(t *testing.T) {
 	client := aomc.NewClient(fakeClient)
 	// Call method to test
 	actual, err := client.GetClasses(moduleName)
+	// Assertions
+	stopOnError(err, t)
+	if diff := deep.Equal(expected, actual); diff != nil {
+		t.Error(diff)
+	}
+}
+
+// TestGetClassByName tests if aomc.GetClassByName leads to the correct aomx.Client call
+// and the correct returned struct
+func TestGetClassByName(t *testing.T) {
+	// Prepare fake data and Get() implementation
+
+	msec := time.Now().UnixNano() / int64(time.Millisecond)
+	hrefString := "https://fake.url"
+	expectedUrl, _ := url.Parse(hrefString)
+	className := "Foo"
+	expected := aomc.Class{
+		ID:      "class1",
+		URL:     *expectedUrl,
+		Created: time.Unix(0, msec*int64(time.Millisecond)), // Only actual time
+		// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
+		// leading to a date from year 1970, while this struct leads to the nil value for time, which is year 0001.
+		LastModified: time.Unix(0, 0),
+		AllowedRolesCreate: []string{
+			"someRole",
+		},
+		Attributes: []aomc.Attribute{
+			// Don't fill the fields with much data, just check if the embedding works.
+			// Attributes are tested more thoroughly in another test.
+			aomc.Attribute{
+				ID:           "attribute1",
+				Created:      time.Unix(0, 0), // See above
+				LastModified: time.Unix(0, 0), // See above
+			},
+			aomc.Attribute{
+				ID:           "attribute2",
+				Created:      time.Unix(0, 0), // See above
+				LastModified: time.Unix(0, 0), // See above
+			},
+		},
+		IsDeprecated: true,
+		Name:         className,
+	}
+	dtosForExpectedJson := []dto.Class{
+		dto.Class{
+			AllowedRolesCreate: []string{
+				"someRole",
+			},
+			CreatedAt:  msec,
+			Href:       hrefString,
+			ID:         "class1",
+			Deprecated: true,
+			Name:       className,
+		},
+		dto.Class{
+			ID:   "class2",
+			Name: "Bar",
+		},
+	}
+	expectedRawAttributes1 := []dto.Attribute{
+		dto.Attribute{
+			ID: "attribute1",
+		},
+		dto.Attribute{
+			ID: "attribute2",
+		},
+	}
+	expectedRawAttributes2 := []dto.Attribute{}
+	expectedClassesJsonBytes, err := json.Marshal(dtosForExpectedJson)
+	stopOnError(err, t)
+	expectedAttributesJsonBytes1, err := json.Marshal(expectedRawAttributes1)
+	stopOnError(err, t)
+	expectedAttributesJsonBytes2, err := json.Marshal(expectedRawAttributes2)
+	stopOnError(err, t)
+	expectedClassesJson := string(expectedClassesJsonBytes)
+	expectedAttributesJson1 := string(expectedAttributesJsonBytes1)
+	expectedAttributesJson2 := string(expectedAttributesJsonBytes2)
+
+	moduleName := "fakeModule"
+	expectedPathClasses := "modules/" + moduleName + "/metamodels"
+	expectedPathAttributes1 := "modules/" + moduleName + "/metamodels/class1/attributes"
+	expectedPathAttributes2 := "modules/" + moduleName + "/metamodels/class2/attributes"
+	validPaths := map[string]bool{
+		expectedPathClasses:     true,
+		expectedPathAttributes1: true,
+		expectedPathAttributes2: true,
+	}
+	onGet = func(path string, params url.Values) (string, error) {
+		var result string
+		// Assertions
+		if !validPaths[path] {
+			t.Errorf("path was %v, but should be one of %v", path, validPaths)
+		}
+		if params != nil {
+			t.Errorf("params was %v, but should be %v", params, nil)
+		}
+		// Assertions were okay, return fake data depending on the path
+		switch path {
+		case expectedPathClasses:
+			result = expectedClassesJson
+		case expectedPathAttributes1:
+			result = expectedAttributesJson1
+		case expectedPathAttributes2:
+			result = expectedAttributesJson2
+		}
+		return result, nil
+	}
+
+	// Create fake client
+	fakeClient := FakeClient{}
+	client := aomc.NewClient(fakeClient)
+	// Call method to test
+	actual, err := client.GetClassByName(moduleName, className)
 	// Assertions
 	stopOnError(err, t)
 	if diff := deep.Equal(expected, actual); diff != nil {

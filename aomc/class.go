@@ -152,6 +152,19 @@ func (client Client) GetClasses(module string) ([]Class, error) {
 	return result, nil
 }
 
+// GetClassByName returns the class in the given module with the given name including its attributes.
+func (client Client) GetClassByName(module string, name string) (Class, error) {
+	rawClass, err := client.GetRawClassByName(module, name)
+	if err != nil {
+		return Class{}, err
+	}
+	// Convert existing fields
+	result := ConvertClassFromDto(rawClass)
+	// Fetch and assign attributes
+	result.Attributes, err = client.GetAttributes(module, result.ID)
+	return result, nil
+}
+
 // GetAttributes returns the attributes of the given class in the given module.
 func (client Client) GetAttributes(module string, classID string) ([]Attribute, error) {
 	result := []Attribute{}
