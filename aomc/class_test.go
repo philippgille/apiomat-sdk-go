@@ -53,6 +53,53 @@ func TestGetRawClasses(t *testing.T) {
 	}
 }
 
+// TestGetRawClassByName tests if aomc.GetRawClassByName leads to the correct aomx.Client call
+// and the correct returned structs
+func TestGetRawClassByName(t *testing.T) {
+	// Prepare fake data and Get() implementation
+	className := "Foo"
+	expected := dto.Class{
+		ID:   "123",
+		Name: className,
+	}
+	dtosForExpectedJson := []dto.Class{
+		dto.Class{
+			ID:   "123",
+			Name: className,
+		},
+		dto.Class{
+			ID:   "456",
+			Name: "Bar",
+		},
+	}
+	expectedJsonBytes, err := json.Marshal(dtosForExpectedJson)
+	stopOnError(err, t)
+	expectedJson := string(expectedJsonBytes)
+	moduleName := "fakeModule"
+	expectedPath := "modules/" + moduleName + "/metamodels"
+	onGet = func(path string, params url.Values) (string, error) {
+		// Assertions
+		if path != expectedPath {
+			t.Errorf("path was %q, but should be %q", path, expectedPath)
+		}
+		if params != nil {
+			t.Errorf("params was %v, but should be %v", params, nil)
+		}
+		// Assertions were okay, return fake data
+		return expectedJson, nil
+	}
+	// Create fake client
+	fakeClient := FakeClient{}
+	client := aomc.NewClient(fakeClient)
+	// Call method to test
+	actual, err := client.GetRawClassByName(moduleName, className)
+	// Assertions
+	stopOnError(err, t)
+	if diff := deep.Equal(expected, actual); diff != nil {
+		t.Error(diff)
+	}
+}
+
 // TestGetRawAttributes tests if aomc.GetRawAttributes leads to the correct aomx.Client call
 // and the correct returned slice of structs
 func TestGetRawAttributes(t *testing.T) {

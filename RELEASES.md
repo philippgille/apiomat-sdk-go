@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+### aomc
+
+- Added: Method `(client Client) GetRawClassByName(module string, name string) (dto.Class, error)` for getting a single class DTO with a given name
+
 v0.6.0 (2018-06-02)
 -------------------
 

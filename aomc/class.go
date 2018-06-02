@@ -4,6 +4,8 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/pkg/errors"
+
 	"github.com/philippgille/apiomat-go/aomc/dto"
 )
 
@@ -99,6 +101,23 @@ func (client Client) GetRawClasses(module string) ([]dto.Class, error) {
 		return nil, err
 	}
 	return result, nil
+}
+
+// GetRawClassByName returns the raw class of the given module with the given name.
+// "Raw" means the struct is mapped 1:1 to a "MetaModel" JSON, without embedded attribute structs for example.
+func (client Client) GetRawClassByName(module string, name string) (dto.Class, error) {
+	// ApiOmat doesn't have an endpoint for fetching a single Class by name
+	// so we get all classes and return the one with the given name.
+	rawClasses, err := client.GetRawClasses(module)
+	if err != nil {
+		return dto.Class{}, err
+	}
+	for _, rawClass := range rawClasses {
+		if name == rawClass.Name {
+			return rawClass, nil
+		}
+	}
+	return dto.Class{}, errors.New("No class was found in module " + module + " with the name " + name)
 }
 
 // GetRawAttributes returns the raw attributes of the given class.
