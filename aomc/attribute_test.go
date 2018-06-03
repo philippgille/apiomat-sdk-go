@@ -94,7 +94,6 @@ func TestGetAttributes(t *testing.T) {
 	}
 	expectedJsonBytes, err := json.Marshal(expectedRawAttributes)
 	stopOnError(err, t)
-	expectedJson := string(expectedJsonBytes)
 
 	moduleName := "fakeModule"
 	expectedPath := "modules/" + moduleName + "/metamodels/123/attributes"
@@ -107,7 +106,7 @@ func TestGetAttributes(t *testing.T) {
 			t.Errorf("params was %v, but should be %v", params, nil)
 		}
 		// Assertions were okay, return fake data
-		return expectedJson, nil
+		return string(expectedJsonBytes), nil
 	}
 
 	// Create fake client

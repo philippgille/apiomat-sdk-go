@@ -102,114 +102,39 @@ func TestGetRawClassByName(t *testing.T) {
 func TestGetClasses(t *testing.T) {
 	// Prepare fake data and Get() implementation
 
-	msec := time.Now().UnixNano() / int64(time.Millisecond)
-	hrefString := "https://fake.url"
-	expectedUrl, _ := url.Parse(hrefString)
+	// CreateTestObjects doesn't create a class object with all fields, but with fields for all types.
+	// A complete set of types is tested in converter_test.
+	expectedClass1, expectedClassDto1, _, expectedAttributesJson1, err := CreateTestObjects("class1", "", "attribute1", "attribute2")
+	stopOnError(err, t)
 	expected := []aomc.Class{
-		// Don't fill all fields. Just a few different types:
-		// Slice of strings, aomc.Attribute, time, URL, string, bool
-		// A complete set of types is tested in converter_test.
+		expectedClass1,
 		aomc.Class{
-			ID:      "789",
-			URL:     *expectedUrl,
-			Created: time.Unix(0, msec*int64(time.Millisecond)), // Only actual time
-			// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
-			// leading to a date from year 1970, while this struct leads to the nil value for time, which is year 0001.
-			LastModified: time.Unix(0, 0),
-			AllowedRolesCreate: []string{
-				"someRole",
-			},
-			Attributes: []aomc.Attribute{
-				// Don't fill the fields with much data, just check if the embedding works.
-				// Attributes are tested more thoroughly in another test.
-				aomc.Attribute{
-					ID:           "123",
-					Created:      time.Unix(0, 0), // See above
-					LastModified: time.Unix(0, 0), // See above
-				},
-				aomc.Attribute{
-					ID:           "456",
-					Created:      time.Unix(0, 0), // See above
-					LastModified: time.Unix(0, 0), // See above
-				},
-			},
-			IsDeprecated: true,
-		},
-		aomc.Class{
-			ID:           "101",
-			Created:      time.Unix(0, 0), // See above
+			ID:           "class2",
+			Created:      time.Unix(0, 0), // Required for reasons stated in comments of CreateTestObjects(...)
 			LastModified: time.Unix(0, 0), // See above
 			Attributes:   []aomc.Attribute{},
 		},
 	}
 	expectedRawClasses := []dto.Class{
+		expectedClassDto1,
 		dto.Class{
-			AllowedRolesCreate: []string{
-				"someRole",
-			},
-			CreatedAt:  msec,
-			Href:       hrefString,
-			ID:         "789",
-			Deprecated: true,
-		},
-		dto.Class{
-			ID: "101",
-		},
-	}
-	expectedRawAttributes1 := []dto.Attribute{
-		dto.Attribute{
-			ID: "123",
-		},
-		dto.Attribute{
-			ID: "456",
+			ID: "class2",
 		},
 	}
 	expectedRawAttributes2 := []dto.Attribute{}
-	expectedClassesJsonBytes, err := json.Marshal(expectedRawClasses)
+	expectedClassesJson, err := json.Marshal(expectedRawClasses)
 	stopOnError(err, t)
-	expectedAttributesJsonBytes1, err := json.Marshal(expectedRawAttributes1)
+	expectedAttributesJson2, err := json.Marshal(expectedRawAttributes2)
 	stopOnError(err, t)
-	expectedAttributesJsonBytes2, err := json.Marshal(expectedRawAttributes2)
-	stopOnError(err, t)
-	expectedClassesJson := string(expectedClassesJsonBytes)
-	expectedAttributesJson1 := string(expectedAttributesJsonBytes1)
-	expectedAttributesJson2 := string(expectedAttributesJsonBytes2)
 
-	moduleName := "fakeModule"
-	expectedPathClasses := "modules/" + moduleName + "/metamodels"
-	expectedPathAttributes1 := "modules/" + moduleName + "/metamodels/789/attributes"
-	expectedPathAttributes2 := "modules/" + moduleName + "/metamodels/101/attributes"
-	validPaths := map[string]bool{
-		expectedPathClasses:     true,
-		expectedPathAttributes1: true,
-		expectedPathAttributes2: true,
-	}
-	onGet = func(path string, params url.Values) (string, error) {
-		var result string
-		// Assertions
-		if !validPaths[path] {
-			t.Errorf("path was %v, but should be one of %v", path, validPaths)
-		}
-		if params != nil {
-			t.Errorf("params was %v, but should be %v", params, nil)
-		}
-		// Assertions were okay, return fake data depending on the path
-		switch path {
-		case expectedPathClasses:
-			result = expectedClassesJson
-		case expectedPathAttributes1:
-			result = expectedAttributesJson1
-		case expectedPathAttributes2:
-			result = expectedAttributesJson2
-		}
-		return result, nil
-	}
+	module := "fakeModule"
+	onGet = CreateTestOnGet(module, "class1", "class2", expectedClassesJson, expectedAttributesJson1, expectedAttributesJson2, t)
 
 	// Create fake client
 	fakeClient := FakeClient{}
 	client := aomc.NewClient(fakeClient)
 	// Call method to test
-	actual, err := client.GetClasses(moduleName)
+	actual, err := client.GetClasses(module)
 	// Assertions
 	stopOnError(err, t)
 	if diff := deep.Equal(expected, actual); diff != nil {
@@ -222,12 +147,38 @@ func TestGetClasses(t *testing.T) {
 func TestGetClassByName(t *testing.T) {
 	// Prepare fake data and Get() implementation
 
+	// CreateTestObjects doesn't create a class object with all fields, but with fields for all types.
+	// A complete set of types is tested in converter_test.
+	className := "Foo"
+	expected, _, expectedClassJson, expectedAttributesJson, err := CreateTestObjects("class1", className, "attribute1", "attribute2")
+
+	module := "fakeModule"
+	expectedClassesJson := []byte("[" + string(expectedClassJson) + "]")
+	onGet = CreateTestOnGet(module, "class1", "_", expectedClassesJson, expectedAttributesJson, nil, t)
+
+	// Create fake client
+	fakeClient := FakeClient{}
+	client := aomc.NewClient(fakeClient)
+	// Call method to test
+	actual, err := client.GetClassByName(module, className)
+	// Assertions
+	stopOnError(err, t)
+	if diff := deep.Equal(expected, actual); diff != nil {
+		t.Error(diff)
+	}
+}
+
+// CreateTestObjects creates an example class object with fields for all different types:
+// Slice of strings, aomc.Attribute, time, URL, string, bool
+// The return values are: The class object, the class DTO, the JSON of the class and the JSON of the attributes in the class.
+func CreateTestObjects(classId string, className string, attrID1 string, attrID2 string) (aomc.Class, dto.Class, []byte, []byte, error) {
 	msec := time.Now().UnixNano() / int64(time.Millisecond)
 	hrefString := "https://fake.url"
 	expectedUrl, _ := url.Parse(hrefString)
-	className := "Foo"
-	expected := aomc.Class{
-		ID:      "class1",
+
+	// Class
+	class := aomc.Class{
+		ID:      classId,
 		URL:     *expectedUrl,
 		Created: time.Unix(0, msec*int64(time.Millisecond)), // Only actual time
 		// Only needed because the empty JSON value is unmarshaled into the nil value for int, 0,
@@ -240,12 +191,12 @@ func TestGetClassByName(t *testing.T) {
 			// Don't fill the fields with much data, just check if the embedding works.
 			// Attributes are tested more thoroughly in another test.
 			aomc.Attribute{
-				ID:           "attribute1",
+				ID:           attrID1,
 				Created:      time.Unix(0, 0), // See above
 				LastModified: time.Unix(0, 0), // See above
 			},
 			aomc.Attribute{
-				ID:           "attribute2",
+				ID:           attrID2,
 				Created:      time.Unix(0, 0), // See above
 				LastModified: time.Unix(0, 0), // See above
 			},
@@ -253,51 +204,50 @@ func TestGetClassByName(t *testing.T) {
 		IsDeprecated: true,
 		Name:         className,
 	}
-	dtosForExpectedJson := []dto.Class{
-		dto.Class{
-			AllowedRolesCreate: []string{
-				"someRole",
-			},
-			CreatedAt:  msec,
-			Href:       hrefString,
-			ID:         "class1",
-			Deprecated: true,
-			Name:       className,
-		},
-		dto.Class{
-			ID:   "class2",
-			Name: "Bar",
-		},
-	}
-	expectedRawAttributes1 := []dto.Attribute{
-		dto.Attribute{
-			ID: "attribute1",
-		},
-		dto.Attribute{
-			ID: "attribute2",
-		},
-	}
-	expectedRawAttributes2 := []dto.Attribute{}
-	expectedClassesJsonBytes, err := json.Marshal(dtosForExpectedJson)
-	stopOnError(err, t)
-	expectedAttributesJsonBytes1, err := json.Marshal(expectedRawAttributes1)
-	stopOnError(err, t)
-	expectedAttributesJsonBytes2, err := json.Marshal(expectedRawAttributes2)
-	stopOnError(err, t)
-	expectedClassesJson := string(expectedClassesJsonBytes)
-	expectedAttributesJson1 := string(expectedAttributesJsonBytes1)
-	expectedAttributesJson2 := string(expectedAttributesJsonBytes2)
 
-	moduleName := "fakeModule"
-	expectedPathClasses := "modules/" + moduleName + "/metamodels"
-	expectedPathAttributes1 := "modules/" + moduleName + "/metamodels/class1/attributes"
-	expectedPathAttributes2 := "modules/" + moduleName + "/metamodels/class2/attributes"
+	// DTOs
+	dtoClass := dto.Class{
+		AllowedRolesCreate: []string{
+			"someRole",
+		},
+		CreatedAt:  msec,
+		Href:       hrefString,
+		ID:         classId,
+		Deprecated: true,
+		Name:       className,
+	}
+	dtoAttributes := []dto.Attribute{
+		dto.Attribute{
+			ID: attrID1,
+		},
+		dto.Attribute{
+			ID: attrID2,
+		},
+	}
+
+	// JSON
+	classJSON, err := json.Marshal(dtoClass)
+	if err != nil {
+		return aomc.Class{}, dto.Class{}, nil, nil, err
+	}
+	attributeJSON, err := json.Marshal(dtoAttributes)
+	if err != nil {
+		return aomc.Class{}, dto.Class{}, nil, nil, err
+	}
+
+	return class, dtoClass, classJSON, attributeJSON, nil
+}
+
+func CreateTestOnGet(module string, classID1 string, classID2 string, expectedClassesJson []byte, expectedAttributesJson1 []byte, expectedAttributesJson2 []byte, t *testing.T) func(path string, params url.Values) (string, error) {
+	expectedPathClasses := "modules/" + module + "/metamodels"
+	expectedPathAttributes1 := "modules/" + module + "/metamodels/" + classID1 + "/attributes"
+	expectedPathAttributes2 := "modules/" + module + "/metamodels/" + classID2 + "/attributes"
 	validPaths := map[string]bool{
 		expectedPathClasses:     true,
 		expectedPathAttributes1: true,
 		expectedPathAttributes2: true,
 	}
-	onGet = func(path string, params url.Values) (string, error) {
+	return func(path string, params url.Values) (string, error) {
 		var result string
 		// Assertions
 		if !validPaths[path] {
@@ -309,23 +259,12 @@ func TestGetClassByName(t *testing.T) {
 		// Assertions were okay, return fake data depending on the path
 		switch path {
 		case expectedPathClasses:
-			result = expectedClassesJson
+			result = string(expectedClassesJson)
 		case expectedPathAttributes1:
-			result = expectedAttributesJson1
+			result = string(expectedAttributesJson1)
 		case expectedPathAttributes2:
-			result = expectedAttributesJson2
+			result = string(expectedAttributesJson2)
 		}
 		return result, nil
-	}
-
-	// Create fake client
-	fakeClient := FakeClient{}
-	client := aomc.NewClient(fakeClient)
-	// Call method to test
-	actual, err := client.GetClassByName(moduleName, className)
-	// Assertions
-	stopOnError(err, t)
-	if diff := deep.Equal(expected, actual); diff != nil {
-		t.Error(diff)
 	}
 }
