@@ -10,14 +10,14 @@ import (
 )
 
 // Class represents an ApiOmat class, also called "MetaModel".
-// It's a convencience type that includes attribute objects in
-// contrast to the plain MetaModel JSON from ApiOmat, as well
-// as proper Go types (like `time.Time` instead of a timestamp).
+// It's a convencience type that includes attribute objects in contrast to
+// the plain MetaModel JSON from ApiOmat, as well as proper Go types
+// (like `time.Time` instead of a Unix epoch timestamp in milliseconds).
 //
-// Some attributes are exposed, but changing their value won't lead
+// Some attributes are exported, but changing their value won't lead
 // to a changed value on the server when updating the entity.
-// For example, "CreatedAt" is set by the server when the class is
-// created and can never be changed. It's an exposed field instead
+// For example, "Created" is set by the server when the class is
+// created and can never be changed. It's an exported field instead
 // of a getter to avoid inconsistency.
 type Class struct {
 	// Read only fields
@@ -43,7 +43,7 @@ type Class struct {
 	RequiredRoleGrant          UserRole
 	RequiredRoleRead           UserRole
 	RequiredRoleWrite          UserRole
-	// Non-exposed
+	// Non-exported
 	attributesURL url.URL
 	methodsURL    url.URL
 	moduleURL     url.URL

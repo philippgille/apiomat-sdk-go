@@ -8,12 +8,13 @@ import (
 )
 
 // Attribute represents an ApiOmat class attribute, also called "MetaModelAttribute".
-// It's a convencience type that contains proper Go types (like `time.Time` instead of a timestamp).
+// It's a convencience type that contains proper Go types (like `time.Time` instead of
+// a Unix epoch timestamp in milliseconds).
 //
-// Some attributes are exposed, but changing their value won't lead
+// Some attributes are exported, but changing their value won't lead
 // to a changed value on the server when updating the entity.
-// For example, "CreatedAt" is set by the server when the attribute is
-// created and can never be changed. It's an exposed field instead of
+// For example, "Created" is set by the server when the attribute is
+// created and can never be changed. It's an exported field instead of
 // a getter to avoid inconsistency.
 type Attribute struct {
 	// Read only fields
@@ -36,7 +37,7 @@ type Attribute struct {
 	IsSensitive   bool
 	RoleForUpdate string
 	Type          string
-	// Not exposed
+	// Not exported
 	isFromOtherModule bool
 	metaModelURL      url.URL
 	refID             string
@@ -61,7 +62,7 @@ func (client Client) GetAttributes(module string, classID string) ([]Attribute, 
 	return result, nil
 }
 
-// GetRawAttributes returns the raw attributes of the given class.
+// GetRawAttributes returns the raw attributes of the given class in the given module.
 // "Raw" means the struct is mapped 1:1 to a "MetaModelAttribute" JSON
 func (client Client) GetRawAttributes(module string, classID string) ([]dto.Attribute, error) {
 	jsonString, err := client.Get("modules/"+module+"/metamodels/"+classID+"/attributes", nil)

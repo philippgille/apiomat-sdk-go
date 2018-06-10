@@ -4,10 +4,10 @@ Package aomx contains common functionality for sending HTTP requests to an ApiOm
 The "x" in aomx is for "cross" (cutting functionality), because the package is used by the aomc and aomu packages.
 Instead of using this package directly, you should use the packages aomc or aomu instead.
 
-If you need some functionality that's not implemented by the aomc and aomu packages you can use this package like this:
-1. Create a client with aomx.NewDefaultClient()
-2. Call the client's Get() method to send an HTTP GET request to an ApiOmat URL of your choice
-3. The returned string is JSON which you can parse and work with
+If you need some functionality that's not implemented by the aomc and aomu packages you can use this package
+as shown in the GoDoc code examples.
+
+All returned errors are github.com/pkg/errors errors and contain a stack trace.
 */
 package aomx
 

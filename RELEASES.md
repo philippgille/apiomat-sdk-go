@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+### aomx
+
+- Improved: GoDoc (added code example, improved existing comments)
+
+### aomc
+
+- Improved: GoDoc (added code example, improved existing comments, fixed wording)
+
 ### aomc
 
 - Added: Method `(client Client) GetRawClassByName(module string, name string) (dto.Class, error)` for getting a single class DTO with a given name
