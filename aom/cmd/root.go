@@ -10,7 +10,7 @@ import (
 
 // Increment and remove "+" in release commits.
 // Add "+" after release commits.
-const version = "v0.6.0"
+const version = "v0.7.0"
 
 var baseURL string
 var username string
