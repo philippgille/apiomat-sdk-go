@@ -10,6 +10,30 @@ import (
 	"github.com/pkg/errors"
 )
 
+// ConvertRawBackendsFromJSON converts a JSON array into a slice of dto.Backend objects.
+// Having an extra function that wraps json.Unmarshal(...) allows us to call the function in tests
+// and change the JSON library later without having to change the tests.
+func ConvertRawBackendsFromJSON(jsonString string) ([]dto.Backend, error) {
+	var result []dto.Backend
+	err := json.Unmarshal([]byte(jsonString), &result)
+	if err != nil {
+		return nil, errors.Wrapf(err, "Couldn't unmarshal the JSON: %v", jsonString)
+	}
+	return result, nil
+}
+
+// ConvertRawBackendFromJSON converts a JSON object into a dto.Backend object.
+// Having an extra function that wraps json.Unmarshal(...) allows us to call the function in tests
+// and change the JSON library later without having to change the tests.
+func ConvertRawBackendFromJSON(jsonString string) (dto.Backend, error) {
+	var result dto.Backend
+	err := json.Unmarshal([]byte(jsonString), &result)
+	if err != nil {
+		return dto.Backend{}, errors.Wrapf(err, "Couldn't unmarshal the JSON: %v", jsonString)
+	}
+	return result, nil
+}
+
 // ConvertRawClassesFromJSON converts a JSON array into a slice of dto.Class objects.
 // Having an extra function that wraps json.Unmarshal(...) allows us to call the function in tests
 // and change the JSON library later without having to change the tests.

@@ -14,12 +14,12 @@ vNext
 
 ### aomc
 
-- Improved: GoDoc (added code example, improved existing comments, fixed wording)
-
-### aomc
-
+- Added: Type `dto.Backend`, which is the DTO for a Backend, which represents an ApiOmat Backend (sometimes called "Application")
+- Added: Method `(client Client) GetRawBackends(customer string) ([]dto.Backend, error)` for getting backend DTOs for all backends a customer has READ permissions for
+- Added: Method `(client Client) GetRawBackendByName(name string, customer string) (dto.Backend, error)` for getting a specific backend a customer has READ permissions for
 - Added: Method `(client Client) GetRawClassByName(module string, name string) (dto.Class, error)` for getting a single class DTO with a given name
 - Added: Method `(client Client) GetClassByName(module string, name string) (Class, error)` for getting a single class with a given name
+- Improved: GoDoc (added code example, improved existing comments, fixed wording)
 
 v0.6.0 (2018-06-02)
 -------------------

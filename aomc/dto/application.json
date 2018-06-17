@@ -1,0 +1,61 @@
+{
+  "createdAt": 1527333443313,
+  "lastModifiedAt": 1528441314674,
+  "applicationName": "TestApp",
+  "applicationDisplayName": "TestApp",
+  "applicationStatus": {
+    "TEST": "ACTIVE",
+    "STAGING": "ACTIVE",
+    "LIVE": "ACTIVE"
+  },
+  "description": "",
+  "apiKeys": {
+    "liveApiKey": "1231231231231231231",
+    "testApiKey": "1231231231231231231",
+    "stagingApiKey": "1231231231231231231"
+  },
+  "configuration": {
+    "liveConfig": {
+      "Basics": {
+        "basics_createRole": "Guest",
+        "basics_usersCanSeeEachOther": "true"
+      }
+    },
+    "stagingConfig": {
+      "Basics": {
+        "basics_createRole": "Guest",
+        "basics_usersCanSeeEachOther": "true"
+      }
+    },
+    "testConfig": {
+      "Basics": {
+        "basics_createRole": "Guest",
+        "basics_usersCanSeeEachOther": "true"
+      }
+    }
+  },
+  "userRoleToCreateRessources": "Guest",
+  "liveClusterBaseURL": "https://epdemo.apiomat.enterprises",
+  "testClusterBaseURL": "https://epdemo.apiomat.enterprises",
+  "stagingClusterBaseURL": "https://epdemo.apiomat.enterprises",
+  "autoUpgradePlan": false,
+  "lastDeployTimes": {
+    "LIVE": 1527333445773
+  },
+  "lastDeployCustomers": {
+    "LIVE": "johndoe@apiomat.com"
+  },
+  "adminName": "johndoe",
+  "analyticsIds": {
+    "TEST": "123123123123123123112312",
+    "STAGING": "123123123123123123112312",
+    "LIVE": "123123123123123123112312"
+  },
+  "href": "https://epdemo.apiomat.enterprises/yambas/rest/customers/johndoe/apps/TestApp",
+  "customerHref": "https://epdemo.apiomat.enterprises/yambas/rest/customers/johndoe",
+  "selectedPlanHref": "https://epdemo.apiomat.enterprises/yambas/rest/customers/johndoe/apps/TestApp/selectedPlan",
+  "selectedPlanJSON": "{\"createdAt\":1490791580584,\"lastModifiedAt\":1490791580584,\"name\":\"Basic\",\"displayName\":\"Basic\",\"price\":99999.0,\"maxMembers\":9223372036854775807,\"maxSpaceInMB\":2147483647,\"maxModules\":99999,\"order\":30,\"allowedSystems\":[\"TEST\",\"STAGING\",\"LIVE\"],\"trialDays\":0,\"fallback\":false,\"unselectable\":false,\"href\":\"null/plans/Basic\"}",
+  "usesUisHref": "https://epdemo.apiomat.enterprises/yambas/rest/customers/johndoe/apps/TestApp/useduis",
+  "usesModulesHref": "https://epdemo.apiomat.enterprises/yambas/rest/customers/johndoe/apps/TestApp/usedmodules",
+  "name": "TestApp"
+}
