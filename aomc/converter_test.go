@@ -12,6 +12,127 @@ import (
 	"github.com/philippgille/apiomat-go/aomc/dto"
 )
 
+func TestConvertRawBackendsFromJSON(t *testing.T) {
+	// Prep
+	// Not all fields must be tested, but one for each type.
+	// string, AnalyticsIds (represernting all structs with the three stages as fields), bool, Configuration (struct with three maps of maps of strings), int64
+
+	adminName1 := "johnDoe"
+	adminName2 := "jeanDoe"
+	liveConfig := make(map[string]map[string]string)
+	stagingConfig := make(map[string]map[string]string)
+	liveConfig["Basics"] = make(map[string]string)
+	stagingConfig["Basics"] = make(map[string]string)
+	liveConfig["Basics"]["basics_createRole"] = "Guest"
+	stagingConfig["Basics"]["basics_createRole"] = "Guest"
+	nowMillis := time.Now().UnixNano() / int64(time.Millisecond)
+
+	expected := []dto.Backend{
+		dto.Backend{
+			AdminName:       adminName1,
+			AutoUpgradePlan: true,
+			CreatedAt:       nowMillis,
+		},
+		dto.Backend{
+			AdminName: adminName2,
+		},
+	}
+	// Must be separate instructions because the structs aren't types
+	expected[0].AnalyticsIds.Live = "01"
+	expected[0].AnalyticsIds.Staging = "02"
+	expected[0].Configuration.LiveConfig = liveConfig
+	expected[0].Configuration.StagingConfig = stagingConfig
+
+	given := `
+		[
+			{
+				"adminName": "` + adminName1 + `",
+				"analyticsIds": {
+					"LIVE": "01",
+					"STAGING": "02"
+				},
+				"autoUpgradePlan": true,
+				"configuration": {
+					"liveConfig": {
+						"Basics": {
+							"basics_createRole": "Guest"
+						  }
+					},
+					"stagingConfig": {
+						"Basics": {
+							"basics_createRole": "Guest"
+						  }
+					}
+				},
+				"createdAt": ` + strconv.FormatInt(nowMillis, 10) + `
+			},
+			{
+				"adminName": "` + adminName2 + `"
+			}
+		]`
+
+	actual, err := aomc.ConvertRawBackendsFromJSON(given)
+	stopOnError(err, t)
+	if diff := deep.Equal(expected, actual); diff != nil {
+		t.Error(diff)
+	}
+}
+
+func TestConvertRawBackendFromJSON(t *testing.T) {
+	// Prep
+	// Not all fields must be tested, but one for each type.
+	// string, AnalyticsIds (represernting all structs with the three stages as fields), bool, Configuration (struct with three maps of maps of strings), int64
+
+	adminName1 := "johnDoe"
+	liveConfig := make(map[string]map[string]string)
+	stagingConfig := make(map[string]map[string]string)
+	liveConfig["Basics"] = make(map[string]string)
+	stagingConfig["Basics"] = make(map[string]string)
+	liveConfig["Basics"]["basics_createRole"] = "Guest"
+	stagingConfig["Basics"]["basics_createRole"] = "Guest"
+	nowMillis := time.Now().UnixNano() / int64(time.Millisecond)
+
+	expected := dto.Backend{
+		AdminName:       adminName1,
+		AutoUpgradePlan: true,
+		CreatedAt:       nowMillis,
+	}
+	// Must be separate instructions because the structs aren't types
+	expected.AnalyticsIds.Live = "01"
+	expected.AnalyticsIds.Staging = "02"
+	expected.Configuration.LiveConfig = liveConfig
+	expected.Configuration.StagingConfig = stagingConfig
+
+	given := `
+		{
+			"adminName": "` + adminName1 + `",
+			"analyticsIds": {
+				"LIVE": "01",
+				"STAGING": "02"
+			},
+			"autoUpgradePlan": true,
+			"configuration": {
+				"liveConfig": {
+					"Basics": {
+						"basics_createRole": "Guest"
+						}
+				},
+				"stagingConfig": {
+					"Basics": {
+						"basics_createRole": "Guest"
+						}
+				}
+			},
+			"createdAt": ` + strconv.FormatInt(nowMillis, 10) + `
+		}`
+
+	actual, err := aomc.ConvertRawBackendFromJSON(given)
+	stopOnError(err, t)
+	if diff := deep.Equal(expected, actual); diff != nil {
+		t.Error(diff)
+	}
+}
+
 func TestConvertRawClassesFromJSON(t *testing.T) {
 	// Prep
 	// Not all fields must be tested, but one for each type.
