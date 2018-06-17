@@ -34,10 +34,14 @@ type Backend struct {
 	Description         string `json:"description"`
 	Href                string `json:"href"`
 	LastDeployCustomers struct {
-		Live string `json:"LIVE"`
+		Live    string `json:"LIVE"`
+		Staging string `json:"STAGING"`
+		Test    string `json:"TEST"`
 	} `json:"lastDeployCustomers"`
 	LastDeployTimes struct {
-		Live int64 `json:"LIVE"`
+		Live    int64 `json:"LIVE"`
+		Staging int64 `json:"STAGING"`
+		Test    int64 `json:"TEST"`
 	} `json:"lastDeployTimes"`
 	LastModifiedAt             int64  `json:"lastModifiedAt"`
 	LiveClusterBaseURL         string `json:"liveClusterBaseURL"`

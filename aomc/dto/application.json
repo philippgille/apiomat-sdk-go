@@ -40,10 +40,14 @@
   "stagingClusterBaseURL": "https://epdemo.apiomat.enterprises",
   "autoUpgradePlan": false,
   "lastDeployTimes": {
-    "LIVE": 1527333445773
+    "LIVE": 1527333445773,
+    "STAGING": 1527333445773,
+    "TEST": 1527333445773
   },
   "lastDeployCustomers": {
-    "LIVE": "johndoe@apiomat.com"
+    "LIVE": "johndoe@apiomat.com",
+    "STAGING": "johndoe@apiomat.com",
+    "TEST": "johndoe@apiomat.com"
   },
   "adminName": "johndoe",
   "analyticsIds": {
