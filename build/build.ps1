@@ -8,7 +8,6 @@ go env
 Write-Output "Building"
 go build github.com/philippgille/apiomat-go/aomx
 go build github.com/philippgille/apiomat-go/aomc
-go build github.com/philippgille/apiomat-go/aom
 
 # Tests
 Write-Output "Running tests"

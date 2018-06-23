@@ -14,8 +14,6 @@ script:
   # builds
   - go build github.com/philippgille/apiomat-go/aomx
   - go build github.com/philippgille/apiomat-go/aomc
-  # Output is needed so that the file and directory names don't clash (both "aom")
-  - go build -o aom/aom github.com/philippgille/apiomat-go/aom
   # tests
   - go test -v github.com/philippgille/apiomat-go/aomx
   - go test -v github.com/philippgille/apiomat-go/aomc
