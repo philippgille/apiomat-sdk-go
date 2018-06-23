@@ -13,7 +13,7 @@ because some attribute names in the JSON are misleading, verbose or inconsistent
 package aomc
 
 import (
-	"github.com/philippgille/apiomat-go/aomx"
+	"github.com/philippgille/apiomat-sdk-go/aomx"
 )
 
 // Client is a client for ApiOmat customer resources.

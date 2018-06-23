@@ -1,7 +1,7 @@
 package aomc
 
 import (
-	"github.com/philippgille/apiomat-go/aomc/dto"
+	"github.com/philippgille/apiomat-sdk-go/aomc/dto"
 )
 
 // GetRawBackends returns the raw backends for the given customer.

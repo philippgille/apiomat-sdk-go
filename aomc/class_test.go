@@ -9,8 +9,8 @@ import (
 
 	"github.com/go-test/deep"
 
-	"github.com/philippgille/apiomat-go/aomc"
-	"github.com/philippgille/apiomat-go/aomc/dto"
+	"github.com/philippgille/apiomat-sdk-go/aomc"
+	"github.com/philippgille/apiomat-sdk-go/aomc/dto"
 )
 
 // TestGetRawClasses tests if aomc.GetRawClasses leads to the correct aomx.Client call

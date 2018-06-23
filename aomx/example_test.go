@@ -3,7 +3,7 @@ package aomx_test
 import (
 	"fmt"
 
-	"github.com/philippgille/apiomat-go/aomx"
+	"github.com/philippgille/apiomat-sdk-go/aomx"
 )
 
 var baseURL = "https://apiomat.yourcompany.com/yambas/rest"

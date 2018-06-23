@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/philippgille/apiomat-go/aomc/dto"
+	"github.com/philippgille/apiomat-sdk-go/aomc/dto"
 )
 
 // Attribute represents an ApiOmat class attribute, also called "MetaModelAttribute".

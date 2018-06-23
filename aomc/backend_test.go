@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/philippgille/apiomat-go/aomc"
+	"github.com/philippgille/apiomat-sdk-go/aomc"
 )
 
 // TestGetRawBackends tests if aomc.TestGetRawBackends leads to the correct aomx.Client call

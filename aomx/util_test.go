@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/philippgille/apiomat-go/aomx"
+	"github.com/philippgille/apiomat-sdk-go/aomx"
 )
 
 func TestMustUrl(t *testing.T) {

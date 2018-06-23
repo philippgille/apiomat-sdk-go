@@ -5,8 +5,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/philippgille/apiomat-go/aomc/dto"
-	"github.com/philippgille/apiomat-go/aomx"
+	"github.com/philippgille/apiomat-sdk-go/aomc/dto"
+	"github.com/philippgille/apiomat-sdk-go/aomx"
 	"github.com/pkg/errors"
 )
 

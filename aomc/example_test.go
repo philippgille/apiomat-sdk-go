@@ -3,7 +3,7 @@ package aomc_test
 import (
 	"fmt"
 
-	"github.com/philippgille/apiomat-go/aomc"
+	"github.com/philippgille/apiomat-sdk-go/aomc"
 )
 
 var baseURL = "https://apiomat.yourcompany.com/yambas/rest"

@@ -3,7 +3,7 @@ package aomc_test
 import (
 	"testing"
 
-	"github.com/philippgille/apiomat-go/aomc"
+	"github.com/philippgille/apiomat-sdk-go/aomc"
 )
 
 func TestAuthImplStatus(t *testing.T) {

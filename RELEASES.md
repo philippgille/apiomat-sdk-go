@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+- Changed: Renamed repository from `apiomat-go` to `apiomat-sdk-go`
 - Changed: Moved `aom` CLI to its own GitHub repository: [https://github.com/philippgille/apiomat-cli](https://github.com/philippgille/apiomat-cli)
 
 v0.7.0 (2018-06-17)

@@ -1,6 +1,6 @@
 version: "{build}"
 
-clone_folder: c:\gopath\src\github.com\philippgille\apiomat-go
+clone_folder: c:\gopath\src\github.com\philippgille\apiomat-sdk-go
 
 # GitHub specific alternative to `clone_depth: <number>`
 shallow_clone: true
@@ -17,9 +17,9 @@ install:
   - go get github.com/go-test/deep
 
 build_script:
-  - go build github.com\philippgille\apiomat-go\aomx
-  - go build github.com\philippgille\apiomat-go\aomc
+  - go build github.com\philippgille\apiomat-sdk-go\aomx
+  - go build github.com\philippgille\apiomat-sdk-go\aomc
 
 test_script:
-  - go test -v github.com\philippgille\apiomat-go\aomx
-  - go test -v github.com\philippgille\apiomat-go\aomc
+  - go test -v github.com\philippgille\apiomat-sdk-go\aomx
+  - go test -v github.com\philippgille\apiomat-sdk-go\aomc

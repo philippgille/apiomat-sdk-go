@@ -6,7 +6,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/philippgille/apiomat-go/aomc/dto"
+	"github.com/philippgille/apiomat-sdk-go/aomc/dto"
 )
 
 // Class represents an ApiOmat class, also called "MetaModel".

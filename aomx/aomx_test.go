@@ -3,7 +3,7 @@ package aomx_test
 import (
 	"testing"
 
-	"github.com/philippgille/apiomat-go/aomx"
+	"github.com/philippgille/apiomat-sdk-go/aomx"
 )
 
 func TestSystem(t *testing.T) {
